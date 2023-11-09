@@ -1,0 +1,37 @@
+Classes:
+
+- plantes basique (attribut interne: estMorte)
+	plante carnivore
+	plante elctrique
+	plante rose qui pique etc
+	projectile
+	
+- zombie basic (avancement = this.vitesse)
+	zombi maman (vitesse de déplacement dépend du type de zombie)
+	attribut interne (points de vie)
+	
+- event --> waves d'arrivée (1 zombie, 2 zombies, 5, 10 zomies)
+
+- grille de jeu: 
+	pathpoint
+	carré sur le plan
+	méthode plante/zombie estmorte --> on l'enlève du jeu 
+	quand zombie mort: rapporte argent (--> aussi en fonction du temps)
+
+- objects
+	tower --> update???
+	
+- étapes de jeu
+	game over
+	début du jeu
+	menu
+	déroulement du jeu --> pls niveaux?
+==> interface graphique
+
+- ui
+	barre avec argent, ou on en est dans le jeu, bouton menu, pause etc
+	grille du jeu implémentée
+==> interface graphique
+
+		
+
