@@ -16,8 +16,8 @@ public class SuperZombie extends Zombie {
     public SuperZombie() {
         super();
         setPdv(150);
-        setDommage(15);
-        setVitesse(1500);
+        setDommage(60);
+        setVitesse(1000);
         setGain(15);
         setReach(2);
     }

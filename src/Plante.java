@@ -12,7 +12,6 @@ public class Plante {
 
     // Points de vie de la plante
     private int pdv;
-    private boolean estMort = false;
 
     // Le dommage qu'elle cause
     private int dommage;
@@ -31,10 +30,19 @@ public class Plante {
         setCout(10);
         setDommage(10);
         setReach(1);
+
+        GrilleJeu.argent -= getCout();
     }
 
     public String toString () {
         return "La plante se trouve à la position " + getX() + ", " + getY() + " et elle a encore " + getPdv() + " points de vie.";
+    }
+
+    public boolean estMort() {
+        if (this.pdv <= 0) {
+            return true;
+        }
+        return false;
     }
 
     public void setPdv(int vie) {
@@ -80,7 +88,7 @@ public class Plante {
 
     // La plante attque un zombie
     public void attaquePlante (Zombie z) {
-        if (this.getY() == z.getY() && this.getX() - z.getX() <= getReach()) {
+        if (this.getY() == z.getY() && Math.abs(this.getX() - z.getX()) <= getReach()){
             z.recoitAttaque(this.getDommage());
         }
     }
@@ -89,21 +97,10 @@ public class Plante {
     public void recoitAttaque (int d) {
         this.pdv =  this.pdv - d;
 
-        if (this.pdv <= 0) {
-            this.estMort = true;
+        if (this.estMort()) {
+            System.out.println("Le zombie a gagné");
         }
     }
 
-    public static void main(String[] args) {
-        PlanteCarnivore pc = new PlanteCarnivore(2, 3);
-        SuperZombie z = new SuperZombie();
-        GrilleJeu game = new GrilleJeu();
-        System.out.println(game.getArgent());
-        pc.attaquePlante(z);
-        System.out.println(game.getArgent());
-        System.out.println(pc.toString());
-        System.out.println(z.toString());
-
-    }
-
+    
 }

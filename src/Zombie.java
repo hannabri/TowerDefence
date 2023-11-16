@@ -9,7 +9,6 @@ public class Zombie {
 
     // Vie du zombie
     private int pdv;
-    private boolean estMort;
     private int gain;
     
     // Dommage qu'il cause
@@ -24,17 +23,27 @@ public class Zombie {
         this.location_x = 4;
         // Random r = new Random();
         this.location_y = 3;
-        this.estMort = false;
 
         setPdv(100);
         setDommage(10);
-        setVitesse(1000);
+        setVitesse(1500);
         setGain(10);
         setReach(1);
     }
 
     public String toString() {
         return "Le zombie se trouve à la position " + getX() + ", " + getY() + " et il a encore " + getPdv() + " points de vie.";
+    }
+
+    public boolean estMort() {
+        if (this.pdv <= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public void setX(int x) {
+        this.location_x = x;
     }
 
     public void setPdv(int vie) {
@@ -81,9 +90,13 @@ public class Zombie {
         return reach;
     }
 
+    public double getVitesse() {
+        return vitesse;
+    }
+
     // Le zombie attque une plante
     public void attaqueZombie (Plante p) {
-        if (this.getY() == p.getY() && this.getX() - p.getX() <= getReach()) {
+        if (this.getY() == p.getY() && Math.abs(this.getX() - p.getX()) <= getReach()) {
             System.out.println("ATTAQUE!");
             p.recoitAttaque(this.getDommage());
         }
@@ -93,23 +106,20 @@ public class Zombie {
     public void recoitAttaque(int d) {
         this.pdv = this.pdv - d;
 
-        if (this.pdv <= 0) {
-            this.estMort = true;
+        if (this.estMort()) {
             GrilleJeu.argent += getGain();
+            System.out.println("La plante a gagné");
         }
     }
 
     public void avancer() {
-        
-        long lastStep = System.currentTimeMillis();
+    
 
          // là faut voir comment on règle l'avancement du zombie. Mais je crois que c'est le principe. 
-        while (this.location_x > 0) {
-            if (System.currentTimeMillis() - lastStep >= vitesse) {
-           
-                this.location_x -= 1; 
-                lastStep = System.currentTimeMillis();
-            }
+        
+        
+            this.setX(this.getX() - 1); 
+            
+            
         }
-    }
 }
