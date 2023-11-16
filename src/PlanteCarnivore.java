@@ -7,6 +7,8 @@ public class PlanteCarnivore extends Plante {
 
     private int dommage = 100;
 
+    private int cout = 15;
+
     public PlanteCarnivore(int x, int y) {
         super(x, y);
     }
@@ -17,6 +19,10 @@ public class PlanteCarnivore extends Plante {
 
     public int getDommage() {
         return dommage;
+    }
+
+    public int getCout() {
+        return cout;
     }
 
     public void attaque(int d) {
