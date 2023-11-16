@@ -1,9 +1,5 @@
 package TowerDefence.src;
 
-import java.time.temporal.ValueRange;
-
-import org.w3c.dom.ranges.Range;
-
 public class Plante {
 
     // endroit où la plante est plantée
