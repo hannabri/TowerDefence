@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class GrilleJeu {
     
     public static int argent = 50; 
-    private int[][] grille = new int [4][4];
+    private int[][] grille = new int [5][5];
 
     private ArrayList <Zombie> zombies = new ArrayList<>();
     private ArrayList <Plante> plantes = new ArrayList<>();
@@ -14,8 +14,8 @@ public class GrilleJeu {
 
     public GrilleJeu() {
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
                 grille[i][j] = 0;
             }
         }
