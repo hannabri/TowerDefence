@@ -21,13 +21,13 @@ public class Zombie {
     public Zombie() {
         // en foction de la longueur du plateau
         this.location_x = 4;
-        // Random r = new Random();
-        this.location_y = 3;
+        Random r = new Random();
+        this.location_y = r.nextInt(4);
 
         setPdv(100);
         setDommage(10);
         setVitesse(1500);
-        setGain(10);
+        setGain(15);
         setReach(1);
     }
 

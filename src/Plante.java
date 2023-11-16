@@ -28,7 +28,7 @@ public class Plante {
 
         setPdv(100);
         setCout(10);
-        setDommage(10);
+        setDommage(15);
         setReach(1);
 
         GrilleJeu.argent -= getCout();
