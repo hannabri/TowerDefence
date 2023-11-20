@@ -4,10 +4,17 @@ public class PlanteCarnivore extends Plante {
 
     public PlanteCarnivore(int x, int y) {
         super(x, y);
-        setPdv(150);
-        setDommage(30);
+        setDommage(50);
         setCout(15);
-        setReach(3);
+        setReach(5);
+
+        if (GrilleJeu.argent < getCout()) {
+            setPdv(0);
+            System.out.println("L'argent n'est pas suffisant pour acheter la planted");
+        } else {
+            setPdv(200);
+            GrilleJeu.argent += getCout();
+        }
     }
 
 

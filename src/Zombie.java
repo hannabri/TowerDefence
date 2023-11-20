@@ -1,4 +1,5 @@
 package TowerDefence.src;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Zombie {
@@ -16,23 +17,23 @@ public class Zombie {
     private int reach;
 
     // Vitesse d'avancement
-    private double vitesse;
+    private int vitesse;
 
     public Zombie() {
         // en foction de la longueur du plateau
-        this.location_x = 4;
+        this.location_x = 9;
         Random r = new Random();
         this.location_y = r.nextInt(4);
 
         setPdv(100);
         setDommage(10);
-        setVitesse(1500);
+        setVitesse(1);
         setGain(15);
         setReach(1);
     }
 
     public String toString() {
-        return "Le zombie se trouve à la position " + getX() + ", " + getY() + " et il a encore " + getPdv() + " points de vie.";
+        return "Le " + this.getClass() + " se trouve à la position " + getX() + ", " + getY() + " et il a encore " + getPdv() + " points de vie.";
     }
 
     public boolean estMort() {
@@ -90,13 +91,13 @@ public class Zombie {
         return reach;
     }
 
-    public double getVitesse() {
+    public int getVitesse() {
         return vitesse;
     }
 
     // Le zombie attque une plante
     public void attaqueZombie (Plante p) {
-        if (this.getY() == p.getY() && Math.abs(this.getX() - p.getX()) <= getReach()) {
+        if (! p.estMort() && this.getY() == p.getY() && Math.abs(this.getX() - p.getX()) <= getReach()) {
             System.out.println("ATTAQUE!");
             p.recoitAttaque(this.getDommage());
         }
@@ -112,14 +113,22 @@ public class Zombie {
         }
     }
 
-    public void avancer() {
+    // public void avancer() {
     
 
-         // là faut voir comment on règle l'avancement du zombie. Mais je crois que c'est le principe. 
+        // là faut voir comment on règle l'avancement du zombie. Mais je crois que c'est le principe. 
+        // long lastStep = System.currentTimeMillis();
+        //  while(this.getX() >= 0) {
+        //     if (System.currentTimeMillis() - lastStep >= this.getVitesse()) {
+        //         System.out.println(this.toString());
+        
+        //         this.setX(this.getX() - 1); 
+        //         lastStep = System.currentTimeMillis();
+        //     }
+        // }
         
         
-            this.setX(this.getX() - 1); 
-            
-            
-        }
+        
+        
+        // }
 }

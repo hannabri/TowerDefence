@@ -1,5 +1,7 @@
 package TowerDefence.src;
 
+import java.util.ArrayList;
+
 public class Plante {
 
     // endroit où la plante est plantée
@@ -20,18 +22,22 @@ public class Plante {
         this.location_x = x;
         this.location_y = y;
 
-        this.pdv = 100;
-
         setPdv(100);
         setCout(10);
-        setDommage(15);
-        setReach(1);
+        setDommage(25);
+        setReach(3);
 
-        GrilleJeu.argent -= getCout();
+        if (GrilleJeu.argent < getCout()) {
+            setPdv(0);
+            System.out.println("L'argent n'est pas suffisant pour acheter la planted");
+        } else {
+            setPdv(200);
+            GrilleJeu.argent += getCout();
+        }
     }
 
     public String toString () {
-        return "La plante se trouve à la position " + getX() + ", " + getY() + " et elle a encore " + getPdv() + " points de vie.";
+        return "La " + this.getClass() + " se trouve à la position " + getX() + ", " + getY() + " et elle a encore " + getPdv() + " points de vie.";
     }
 
     public boolean estMort() {
@@ -84,7 +90,7 @@ public class Plante {
 
     // La plante attque un zombie
     public void attaquePlante (Zombie z) {
-        if (this.getY() == z.getY() && Math.abs(this.getX() - z.getX()) <= getReach()){
+        if (! z.estMort() && this.getY() == z.getY() && Math.abs(this.getX() - z.getX()) <= getReach()){
             z.recoitAttaque(this.getDommage());
         }
     }

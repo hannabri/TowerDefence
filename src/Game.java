@@ -1,5 +1,7 @@
 package TowerDefence.src;
 
+import java.util.ArrayList;
+
 public class Game {
 
     private int vagues;
@@ -15,54 +17,92 @@ public class Game {
     public int getVagues() {
         return vagues;
     }
+    
+    public void avancer(ArrayList<Zombie> zombies, ArrayList<Plante> plantes) {
 
-    public static void main(String[] args) {
-        GrilleJeu game = new GrilleJeu();
-        System.out.println(game.getArgent());
-       
-        game.createPlante(new PlanteCarnivore(0, 0));
-        game.createPlante(new Rose(1, 2));
-        game.createPlante(new Rose(4, 4));
-        // game.createZombie(new SuperZombie());
-        // game.createZombie(new Zombie());
-
-        Zombie z = new Zombie();
-        PlanteCarnivore pc = new PlanteCarnivore(2, 1);
-
-        System.out.println(game.getArgent());
-
-        game.afficher();
-
-        System.out.println(z.toString());
-        
         long lastStep = System.currentTimeMillis();
-        while(z.getX() >= 0) {
-            if (System.currentTimeMillis() - lastStep >= z.getVitesse()) {
 
-                z.avancer();
-                if (! pc.estMort()) {
-                    pc.attaquePlante(z);
-                    System.out.println(pc.toString());
-                    z.attaqueZombie(pc);
+        boolean goOn = true;
+        while(goOn){
+            if (System.currentTimeMillis() - lastStep >= 1000) {
+                ArrayList<Zombie> zombiesMorts = new ArrayList<>();
+                ArrayList<Plante> plantesMortes = new ArrayList<>();
+                for (Zombie z : zombies) {
+                    System.out.println(zombies);
+                    z.setX(z.getX() - z.getVitesse());
                     
-                }
+
+                    for (Plante p : plantes) {
+                        if (p.getY() == z.getY()) {
+                            
+                            p.attaquePlante(z);
+                            z.attaqueZombie(p);
+
+                            System.out.println(p.toString());
+                        }
+                        if (p.estMort()) {
+                            plantesMortes.add(p);
+                        }
+                        if (z.estMort()) {
+                            zombiesMorts.add(z);
+                        }
+                    }
+                        
+                    for (Plante pm : plantesMortes) {
+                        plantes.remove(pm);
+                    }                     
+
+
+                    if (z.getX() <= 0) {
+                        System.out.println("GAME OVER!");
+                        goOn = false;
+                        break;
+                    }
+
                 
-                if (z.estMort()) {
-                    break;
+                }
+                for (Zombie zm : zombiesMorts) {
+                    zombies.remove(zm);
+
                 }
 
-                if (z.getX() == -1) {
-                    System.out.println("GAME OVER!");
-                    break;
+                if (zombies.isEmpty()) {
+                    System.out.println("Les plantes ont gagnées!");
+                    goOn = false;
                 }
+                // System.out.println(z.toString());
                 
-                System.out.println(z.toString());
-
-
                 lastStep = System.currentTimeMillis();
             }
         }
-        
+
     }
+
+
+    public static void main(String[] args) {
+        GrilleJeu gameSet = new GrilleJeu();
+        System.out.println(gameSet.getArgent());
+        Game game = new Game();
+       
+        gameSet.createPlante(new PlanteCarnivore(0, 0));
+        gameSet.createPlante(new PlanteCarnivore(0, 1));
+        gameSet.createPlante(new Rose(1, 2));
+        gameSet.createPlante(new Plante(2, 3));
+        gameSet.createPlante(new Rose(4, 4));
+        gameSet.createPlante(new Plante(4, 4));
+        gameSet.createZombie(new SuperZombie());
+        gameSet.createZombie(new Zombie());
+
+        // Zombie z = new Zombie();
+        // PlanteCarnivore pc = new PlanteCarnivore(2, 1);
+
+        System.out.println(gameSet.getArgent());
+
+        gameSet.afficher();
+        game.avancer(gameSet.getZombies(), gameSet.getPlantes());
+        // System.out.println(gameSet.getPlantes());
+        
+        
+        }
 
 }
