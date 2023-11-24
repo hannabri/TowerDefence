@@ -1,5 +1,4 @@
 package TowerDefence.src;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Zombie {
@@ -109,6 +108,7 @@ public class Zombie {
 
         if (this.estMort()) {
             GrilleJeu.argent += getGain();
+            GrilleJeu.grille[getX()][getY()] = 0;
             System.out.println("La plante a gagné");
         }
     }

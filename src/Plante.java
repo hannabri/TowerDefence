@@ -1,6 +1,5 @@
 package TowerDefence.src;
 
-import java.util.ArrayList;
 
 public class Plante {
 
@@ -24,12 +23,12 @@ public class Plante {
 
         setPdv(150);
         setCout(10);
-        setDommage(185);
-        setReach(3);
+        setDommage(20);
+        setReach(1);
 
         if (GrilleJeu.argent < getCout()) {
             setPdv(0);
-            System.out.println("L'argent n'est pas suffisant pour acheter la planted");
+            System.out.println("L'argent n'est pas suffisant pour acheter une plante");
         } else {
             setPdv(200);
             GrilleJeu.argent -= getCout();
@@ -91,11 +90,10 @@ public class Plante {
     // La plante attque un zombie
     public void attaquePlante (Zombie z) {
         int test = Math.abs(this.getX() - z.getX()); 
-        if (! z.estMort() && this.getY() == z.getY() && test <= getReach()){
-            System.out.println(Math.abs(this.getX() - z.getX()));
+        if (! z.estMort() && test <= getReach()){
             System.out.println("ATTAQUE PLANTE!");
-            System.out.println(this.toString());
             z.recoitAttaque(this.getDommage());
+            System.out.println(z.toString());
         }
     }
     
