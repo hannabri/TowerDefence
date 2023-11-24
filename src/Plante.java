@@ -32,7 +32,7 @@ public class Plante {
             System.out.println("L'argent n'est pas suffisant pour acheter la planted");
         } else {
             setPdv(200);
-            GrilleJeu.argent += getCout();
+            GrilleJeu.argent -= getCout();
         }
     }
 
@@ -90,8 +90,11 @@ public class Plante {
 
     // La plante attque un zombie
     public void attaquePlante (Zombie z) {
-        if (! z.estMort() && this.getY() == z.getY() && Math.abs(this.getX() - z.getX()) <= getReach()){
+        int test = Math.abs(this.getX() - z.getX()); 
+        if (! z.estMort() && this.getY() == z.getY() && test <= getReach()){
+            System.out.println(Math.abs(this.getX() - z.getX()));
             System.out.println("ATTAQUE PLANTE!");
+            System.out.println(this.toString());
             z.recoitAttaque(this.getDommage());
         }
     }

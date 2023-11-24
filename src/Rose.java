@@ -13,7 +13,7 @@ public class Rose extends Plante {
             System.out.println("L'argent n'est pas suffisant pour acheter la plante");
         } else {
             setPdv(200);
-            GrilleJeu.argent += getCout();
+            GrilleJeu.argent -= getCout();
         }
 
     }

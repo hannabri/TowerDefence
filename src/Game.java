@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import javax.security.sasl.SaslException;
 
+
 public class Game {
 
     private int vagues;
@@ -27,13 +28,14 @@ public class Game {
                 ArrayList<Zombie> zombiesMorts = new ArrayList<>();
                 ArrayList<Plante> plantesMortes = new ArrayList<>();
                 
-                System.out.println(zombies);
+                
                 System.out.println("");
 
                 for (Zombie z : zombies) {
                     
-                    z.setX(z.getX() - z.getVitesse());
                     
+                    z.setX(z.getX() - z.getVitesse());
+                    System.out.println(z.toString());
 
                     for (Plante p : plantes) {
                         if (p.getY() == z.getY()) {
@@ -106,8 +108,10 @@ public class Game {
         long lastStep = System.currentTimeMillis();
         boolean goOn = true;
         while(goOn){
+            
             boolean newPlante = true;
             
+            System.out.println("Il vous reste " + gameSet.getArgent() + " d'argent.");
             System.out.println("Vous voulez créer un plante ? (y / n)");
 
             if (in.nextLine().equals("n")) {
@@ -120,9 +124,16 @@ public class Game {
                 int pos_x = in.nextInt();
                 int pos_y = in.nextInt();
 
+                if (pos_x > 9 || pos_y > 4 || GrilleJeu.grille[pos_x][pos_y] == 1) {
+                    System.out.println("La position n'est pas disponible. Entrez une nouvelle position.");
+                    pos_x = in.nextInt();
+                    pos_y = in.nextInt();
+                }
+
                 System.out.println("Voulez-vous créer une plante basique - 1, une plante carnivore - 2 ou une rose - 3 ?");
 
                 int typePlante = in.nextInt();
+                in.nextLine();
 
                 switch (typePlante) {
                     case 1:
@@ -147,19 +158,29 @@ public class Game {
 
                 gameSet.afficher();
 
+                if (GrilleJeu.argent <= 0) {
+                    newPlante = false;
+                }
+
+                System.out.println("Il vous reste " + gameSet.getArgent() + " d'argent.");
                 System.out.println("Vous voulez créer une autre plante ? (y / n)");
-                if (in.nextLine().equals("n")) {
+
+
+                String reponse = in.nextLine();
+                if (reponse.equals("n")) {
                     newPlante = false;
                 }
 
             }
 
             if (System.currentTimeMillis() - lastStep >= 1000) {
-                gameSet.afficher();
-                System.out.println("");
+                
                 if (! game.avancer(gameSet.getZombies(), gameSet.getPlantes())) {
                     goOn = false;
                 }
+
+                gameSet.afficher();
+                System.out.println("");
                 
                 lastStep = System.currentTimeMillis();
             }
