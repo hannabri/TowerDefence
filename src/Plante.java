@@ -22,9 +22,9 @@ public class Plante {
         this.location_x = x;
         this.location_y = y;
 
-        setPdv(100);
+        setPdv(150);
         setCout(10);
-        setDommage(25);
+        setDommage(185);
         setReach(3);
 
         if (GrilleJeu.argent < getCout()) {
@@ -37,7 +37,7 @@ public class Plante {
     }
 
     public String toString () {
-        return "La " + this.getClass() + " se trouve à la position " + getX() + ", " + getY() + " et elle a encore " + getPdv() + " points de vie.";
+        return "La " + this.getClass() + " se trouve à la position " + getX() + ", " + getY() + ", elle a encore " + getPdv() + " points de vie elle atteint le zombie à " + getReach() + ".";
     }
 
     public boolean estMort() {
@@ -91,6 +91,7 @@ public class Plante {
     // La plante attque un zombie
     public void attaquePlante (Zombie z) {
         if (! z.estMort() && this.getY() == z.getY() && Math.abs(this.getX() - z.getX()) <= getReach()){
+            System.out.println("ATTAQUE PLANTE!");
             z.recoitAttaque(this.getDommage());
         }
     }

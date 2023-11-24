@@ -98,7 +98,7 @@ public class Zombie {
     // Le zombie attque une plante
     public void attaqueZombie (Plante p) {
         if (! p.estMort() && this.getY() == p.getY() && Math.abs(this.getX() - p.getX()) <= getReach()) {
-            System.out.println("ATTAQUE!");
+            System.out.println("ATTAQUE ZOMBIE!");
             p.recoitAttaque(this.getDommage());
         }
     }

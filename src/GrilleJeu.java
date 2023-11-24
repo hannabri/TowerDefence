@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class GrilleJeu {
     
     public static int argent = 500; 
-    private int[][] grille = new int [10][5];
+    public static int[][] grille = new int [10][5];
 
     private ArrayList <Zombie> zombies = new ArrayList<>();
     private ArrayList <Plante> plantes = new ArrayList<>();
@@ -22,7 +22,7 @@ public class GrilleJeu {
     }
 
     public void afficher() {
-        for (int i = 0; i < grille[0].length; i++) {
+        for (int i = 0; i < 10; i++) {
             
             for (int j = 0; j < grille[1].length; j++) {
                 System.out.print(grille[i][j]);
@@ -36,6 +36,12 @@ public class GrilleJeu {
     }
 
     public ArrayList<Zombie> getZombies() {
+        for (Zombie z : this.zombies) {
+            grille[z.getX()][z.getY()] = 2;
+            if (z.getX() + z.getVitesse() < 10) {
+                grille[z.getX() + z.getVitesse()][z.getY()] = 0;
+            }
+        }
         return zombies;
     }
 
