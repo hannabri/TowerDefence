@@ -41,7 +41,7 @@ public class Game {
         }
     }
 
-    private boolean checkGameEnd(ArrayList<Zombie> zombies) {
+    public boolean checkGameEnd(ArrayList<Zombie> zombies) {
 
         if (zombies.isEmpty()) {
             System.out.println("Les plantes ont gagnées!");
@@ -59,7 +59,7 @@ public class Game {
 
     }
 
-    private void avancer(ArrayList<Zombie> zombies, ArrayList<Plante> plantes) {
+    public void avancer(ArrayList<Zombie> zombies, ArrayList<Plante> plantes) {
         System.out.println("");
 
         for (Zombie z : zombies) {
@@ -88,27 +88,14 @@ public class Game {
 
         gameSet.createZombie(new SuperZombie());
         gameSet.createZombie(new Zombie());
+        
+        GamePlante planteThread = new GamePlante(game, gameSet);
+        GameZombie zombieThread = new GameZombie(gameSet, game);
+        zombieThread.run();
+        // planteThread.run();
+        
+        
 
-        long lastStep = System.currentTimeMillis();
-        boolean goOn = true;
-
-        while (goOn) {
-            gameSet.createPlante();
-
-            if (System.currentTimeMillis() - lastStep >= 1000) {
-                game.avancer(gameSet.getZombies(), gameSet.getPlantes());
-
-                gameSet.afficher();
-                System.out.println("");
-
-                goOn = game.checkGameEnd(gameSet.getZombies());
-
-                lastStep = System.currentTimeMillis();
-            }
-        }
-        gameSet.afficher();
-
-
-        }
+    }   
 
 }
