@@ -8,8 +8,10 @@ import java.awt.event.ActionListener;
 public class Highscores extends JFrame {
     private static final int largeur = 300;
     private static final int hauteur = 200;
+    private JFrame menu;
 
-    public Highscores() {
+    public Highscores(JFrame menu) {
+        this.menu = menu;
         // Create a button that will navigate to the Menu scene
         JButton menuButton = new JButton("Menu");
         menuButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
@@ -34,9 +36,7 @@ public class Highscores extends JFrame {
                 // Code to navigate to the Menu scene
                 if (e.getSource() == menuButton) {
                     // code to reopen the menu
-                    dispose();
-                    Menu menu = new Menu();
-                    menu.setVisible(true);
+                    menu.setEnabled(true);
                 }
             }
         });

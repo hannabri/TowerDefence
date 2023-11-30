@@ -2,7 +2,8 @@ package TowerDefence.source;
 
 import java.util.Scanner;
 
-import TowerDefence.scene.Menu;
+// import TowerDefence.scene.Menu;
+import TowerDefence.scene.Menu_file;
 
 
 public class main_file {
@@ -19,7 +20,8 @@ public class main_file {
                 break;
             case 2:
                 System.out.println("You have chosen Graphical mode\n");
-                Menu.graphical_game(args);
+                Menu_file menu = new Menu_file();
+                menu.setVisible(true); // set the menu visible
                 break;
             default:
                 System.out.println("Default mode is terminal mode\n");
