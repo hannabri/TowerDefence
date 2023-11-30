@@ -1,4 +1,4 @@
-package TowerDefence.src;
+package TowerDefence.source;
 
 public class SuperZombie extends Zombie { 
 

@@ -1,4 +1,4 @@
-package TowerDefence.src;
+package TowerDefence.source;
 import java.util.Random;
 
 public class Zombie {
