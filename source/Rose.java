@@ -1,10 +1,10 @@
-package TowerDefence.src;
+package TowerDefence.source;
 
 public class Rose extends Plante {
-    
+
     public Rose(int x, int y) {
         super(x, y);
-        
+
         setDommage(75);
         setCout(40);
         setReach(3);

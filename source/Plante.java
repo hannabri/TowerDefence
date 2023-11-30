@@ -1,4 +1,4 @@
-package TowerDefence.src;
+package TowerDefence.source;
 
 
 public class Plante {
@@ -16,7 +16,7 @@ public class Plante {
     // Le coût de la plante
     private int cout;
     private int reach;
-    
+
     public Plante (int x, int y) {
         this.location_x = x;
         this.location_y = y;
@@ -89,14 +89,14 @@ public class Plante {
 
     // La plante attque un zombie
     public void attaquePlante (Zombie z) {
-        int test = Math.abs(this.getX() - z.getX()); 
+        int test = Math.abs(this.getX() - z.getX());
         if (! z.estMort() && test <= getReach()){
             System.out.println("ATTAQUE PLANTE!");
             z.recoitAttaque(this.getDommage());
             System.out.println(z.toString());
         }
     }
-    
+
     // La plante est attaquée par un zombie
     public void recoitAttaque (int d) {
         this.pdv =  this.pdv - d;
@@ -106,5 +106,5 @@ public class Plante {
         }
     }
 
-    
+
 }

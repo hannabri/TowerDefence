@@ -1,6 +1,4 @@
-package TowerDefence.src;
-
-
+package TowerDefence.source;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;

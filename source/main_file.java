@@ -1,6 +1,8 @@
-package TowerDefence.src;
+package TowerDefence.source;
 
 import java.util.Scanner;
+
+import TowerDefence.scene.Menu;
 
 
 public class main_file {
@@ -16,17 +18,14 @@ public class main_file {
                 Game.console_game(args);
                 break;
             case 2:
-                System.out.println("Tou have chosen Graphical mode\n");
-                //make a function for graphical mode for example
-                //Game.graphical_game(args);
+                System.out.println("You have chosen Graphical mode\n");
+                Menu.graphical_game(args);
                 break;
             default:
                 System.out.println("Default mode is terminal mode\n");
-                //lanunch the game in terminal mode
                 Game.console_game(args);
         }
     }
 
 }
-
 

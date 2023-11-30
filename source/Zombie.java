@@ -1,16 +1,16 @@
-package TowerDefence.src;
+package TowerDefence.source;
 import java.util.Random;
 
 public class Zombie {
 
-    // Je crois qu'on les initialise dès le début psk ils partent tout du même endroit. 
+    // Je crois qu'on les initialise dès le début psk ils partent tout du même endroit.
     private int location_x;
     private int location_y;
 
     // Vie du zombie
     private int pdv;
     private int gain;
-    
+
     // Dommage qu'il cause
     private int dommage;
     private int reach;
@@ -64,7 +64,7 @@ public class Zombie {
 
     public void setReach(int r) {
         this.reach = r;
-    }   
+    }
 
     public int getX() {
         return location_x;
@@ -77,7 +77,7 @@ public class Zombie {
     public int getPdv() {
         return pdv;
     }
-    
+
     public int getDommage() {
         return dommage;
     }
@@ -114,21 +114,21 @@ public class Zombie {
     }
 
     // public void avancer() {
-    
 
-        // là faut voir comment on règle l'avancement du zombie. Mais je crois que c'est le principe. 
+
+        // là faut voir comment on règle l'avancement du zombie. Mais je crois que c'est le principe.
         // long lastStep = System.currentTimeMillis();
         //  while(this.getX() >= 0) {
         //     if (System.currentTimeMillis() - lastStep >= this.getVitesse()) {
         //         System.out.println(this.toString());
-        
-        //         this.setX(this.getX() - 1); 
+
+        //         this.setX(this.getX() - 1);
         //         lastStep = System.currentTimeMillis();
         //     }
         // }
-        
-        
-        
-        
+
+
+
+
         // }
 }

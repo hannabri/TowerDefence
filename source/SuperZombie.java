@@ -1,6 +1,6 @@
-package TowerDefence.src;
+package TowerDefence.source;
 
-public class SuperZombie extends Zombie { 
+public class SuperZombie extends Zombie {
 
     public SuperZombie() {
         super();
@@ -14,5 +14,5 @@ public class SuperZombie extends Zombie {
     // public String toString() {
     //     return "Le super zombie se trouve à la position " + getX() + ", " + getY() + " et il a encore " + getPdv() + " points de vie.";
     // }
-    
+
 }
