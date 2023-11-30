@@ -15,7 +15,7 @@ public class GrilleJeu {
 
     public GrilleJeu() {
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 5; j++) {
                 grille[i][j] = 0;
             }
@@ -23,10 +23,9 @@ public class GrilleJeu {
     }
 
     public void afficher() {
-        for (int i = 0; i < 10; i++) {
-
-            for (int j = 0; j < grille[1].length; j++) {
-                System.out.print(grille[i][j]);
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 10; j++) {
+                System.out.print(grille[j][i]);
             }
             System.out.println("");
         }
@@ -57,7 +56,6 @@ public class GrilleJeu {
         return z;
     }
     private Plante processUserResponse(int typePlante, int pos_x, int pos_y) {
-
         Plante p;
 
         switch (typePlante) {
@@ -100,9 +98,9 @@ public class GrilleJeu {
             }
 
             while (newPlante) {
-                System.out.println("La plante basique coûte 10 et atteint un zombie à 1 avec un dommage de 185");
-                System.out.println("La plante carnivore coûte 25 et atteint un zombie à 5 avec un dommage de 50");
-                System.out.println("La rose coûte 50 et atteint un zombie à 3 avec un dommage de 75");
+                System.out.println("1 - La plante basique coûte 10 et atteint un zombie à 1 avec un dommage de 185");
+                System.out.println("2 - La plante carnivore coûte 25 et atteint un zombie à 5 avec un dommage de 50");
+                System.out.println("3 - La rose coûte 50 et atteint un zombie à 3 avec un dommage de 75");
                 System.out.println("Voulez-vous créer une plante basique - 1, une plante carnivore - 2 ou une rose - 3 ?");
 
 

@@ -108,7 +108,6 @@ public class Zombie {
 
         if (this.estMort()) {
             GrilleJeu.argent += getGain();
-            GrilleJeu.grille[getX()][getY()] = 0;
             System.out.println("La plante a gagné");
         }
     }

@@ -76,7 +76,7 @@ public class Game {
         }
 
         for (Zombie zm : zombiesMorts) {
-            GrilleJeu.grille[zm.getX()][zm.getY()] = 0;
+            GrilleJeu.grille[zm.getX() + zm.getVitesse()][zm.getY()] = 0;
             zombies.remove(zm);
         }
     }
