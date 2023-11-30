@@ -8,7 +8,7 @@ public class Game {
     private int vagues;
     private ArrayList<Plante> plantesMortes = new ArrayList<>();
     private ArrayList<Zombie> zombiesMorts = new ArrayList<>();
-    
+
     public Game() {
         setVagues(3);
     }
@@ -16,7 +16,7 @@ public class Game {
     public void setVagues(int v) {
         this.vagues = v;
     }
-    
+
     public int getVagues() {
         return vagues;
     }
@@ -25,7 +25,7 @@ public class Game {
 
         for (Plante p : plantes) {
             if (p.getY() == z.getY()) {
-                
+
                 p.attaquePlante(z);
                 z.attaqueZombie(p);
 
@@ -42,7 +42,7 @@ public class Game {
     }
 
     private boolean checkGameEnd(ArrayList<Zombie> zombies) {
-        
+
         if (zombies.isEmpty()) {
             System.out.println("Les plantes ont gagnées!");
             return false;
@@ -54,25 +54,25 @@ public class Game {
                     return false;
                 }
             }
-        
+
         return true;
 
     }
-    
-    private void avancer(ArrayList<Zombie> zombies, ArrayList<Plante> plantes) {                
+
+    private void avancer(ArrayList<Zombie> zombies, ArrayList<Plante> plantes) {
         System.out.println("");
 
         for (Zombie z : zombies) {
-            
-            
+
+
             z.setX(z.getX() - z.getVitesse());
 
             attaquer(plantes, z);
             System.out.println(z.toString());
-                
+
             for (Plante pm : plantesMortes) {
                 plantes.remove(pm);
-            }         
+            }
         }
 
         for (Zombie zm : zombiesMorts) {
@@ -82,50 +82,33 @@ public class Game {
     }
 
 
-    public static void main(String[] args) {
+    public static void console_game(String[] args) {
         GrilleJeu gameSet = new GrilleJeu();
-        // System.out.println(gameSet.getArgent());
         Game game = new Game();
-       
-        // gameSet.createPlante(new PlanteCarnivore(0, 0));
-        // gameSet.createPlante(new PlanteCarnivore(0, 1));
-        // gameSet.createPlante(new Rose(1, 2));
-        // gameSet.createPlante(new Plante(2, 3));
-        // gameSet.createPlante(new Rose(4, 4));
-        // gameSet.createPlante(new Plante(4, 4));
+
         gameSet.createZombie(new SuperZombie());
         gameSet.createZombie(new Zombie());
 
-        
-
-        // Zombie z = new Zombie();
-        // PlanteCarnivore pc = new PlanteCarnivore(2, 1);
-
-        // System.out.println(gameSet.getArgent());
-        // System.out.println(gameSet.getPlantes());
-
-        
         long lastStep = System.currentTimeMillis();
         boolean goOn = true;
-        while(goOn){
-        
+
+        while (goOn) {
             gameSet.createPlante();
 
             if (System.currentTimeMillis() - lastStep >= 1000) {
-                
                 game.avancer(gameSet.getZombies(), gameSet.getPlantes());
 
                 gameSet.afficher();
                 System.out.println("");
 
                 goOn = game.checkGameEnd(gameSet.getZombies());
-                
+
                 lastStep = System.currentTimeMillis();
             }
         }
         gameSet.afficher();
-        
-        
+
+
         }
 
 }
