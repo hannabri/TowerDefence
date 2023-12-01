@@ -1,4 +1,4 @@
-package TowerDefence.scene;
+package TowerDefence.scenes;
 
 import javax.swing.*;
 import java.awt.*;
