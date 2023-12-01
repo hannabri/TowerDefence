@@ -8,6 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Menu extends JFrame {
+    Highscores h ; // create an instance of the highscores class
+    Settings s;
+    Rules r;
+    Credits c;
+    // Create a panel
 
     public Menu() {
         setTitle("Tower Defence");
@@ -32,7 +37,11 @@ public class Menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Add code for settings class
-                System.out.println("Opening settings...");
+                if (e.getSource() == optionsButton) {
+                    // code to reopen the menu
+                    Settings s = new Settings();
+                    mainPanel.setVisible(false);
+                }
             }
         });
 
@@ -49,8 +58,12 @@ public class Menu extends JFrame {
         rulesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Add code to exit the application
-                System.exit(0);
+                // Add code to navigates throught the rules class
+                if (e.getSource() == rulesButton) {
+                    // code to reopen the menu
+                    Rules r = new Rules();
+                    mainPanel.setVisible(false);
+                }
             }
         });
         JButton creditsButton = new JButton("Credits");
@@ -58,7 +71,11 @@ public class Menu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Add code to exit the application
-                System.exit(0);
+                 if (e.getSource() == creditsButton) {
+                    // code to reopen the menu
+                    Credits c = new Credits();
+                    mainPanel.setVisible(false);
+                }
             }
         });
 
@@ -66,8 +83,13 @@ public class Menu extends JFrame {
         highscoresButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Add code to exit the application
-                System.exit(0);
+                // Add code to navigates throught the highscores class
+                if (e.getSource() == highscoresButton) {
+                    // code to reopen the menu
+                    Highscores h = new Highscores();
+                    mainPanel.setVisible(false);
+                }
+                // System.exit(0);
             }
         });
 
@@ -77,8 +99,6 @@ public class Menu extends JFrame {
         mainPanel.add(rulesButton);
         mainPanel.add(creditsButton);
         mainPanel.add(exitButton);
-
-
 
 
         getContentPane().add(mainPanel);

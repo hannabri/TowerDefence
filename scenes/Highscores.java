@@ -10,36 +10,9 @@ public class Highscores extends JFrame {
     private static final int hauteur = 200;
     private JFrame menu;
 
-    public Highscores(JFrame menu) {
-        this.menu = menu;
-        // Create a button that will navigate to the Menu scene
-        JButton menuButton = new JButton("Menu");
-        menuButton.setAlignmentX(JButton.CENTER_ALIGNMENT);
-        menuButton.addActionListener(e -> {
-            // Code to re open the menu frame
-
-        });
-
+    public Highscores() {
+        // Create a panel
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-
-        // Align the buttons in the center
-        panel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
-
-        // Add the button to the panel
-        panel.add(menuButton);
-
-        // If I click on the button, I want to navigate to the Menu scene
-        menuButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Code to navigate to the Menu scene
-                if (e.getSource() == menuButton) {
-                    // code to reopen the menu
-                    menu.setEnabled(true);
-                }
-            }
-        });
 
         // Add the panel to the frame
         add(panel, BorderLayout.NORTH);
@@ -49,8 +22,23 @@ public class Highscores extends JFrame {
         setTitle("Highscores");
         setLocationRelativeTo(null);
 
+        // Create a button to return to the menu screen
+        JButton returnButton = new JButton("Menu");
+        returnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Add code to return to the menu screen
+                menu = new Menu();
+                menu.setVisible(true);
+                dispose();
+            }
+        });
+
+
+        add(returnButton, BorderLayout.SOUTH);
         // Set the text area to be uneditable
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        getContentPane().add(panel);
     }
 }
