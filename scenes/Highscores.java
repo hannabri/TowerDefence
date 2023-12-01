@@ -34,7 +34,7 @@ public class Highscores extends JFrame {
             }
         });
 
-
+        //  Get the previous scores from the file
         add(returnButton, BorderLayout.SOUTH);
         // Set the text area to be uneditable
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
