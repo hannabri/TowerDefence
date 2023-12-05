@@ -93,6 +93,7 @@ public class Game {
         GameZombie zombieThread = new GameZombie(gameSet, game);
         zombieThread.run();
         // planteThread.run();
+        // créer zombie et le faire avancer directement.
         
         
 
