@@ -4,11 +4,13 @@ public class GameZombie extends Thread {
 
     GrilleJeu gameSet;
     Game game;
+    long sleep;
     
-    public GameZombie(GrilleJeu gameSet, Game game) {
+    public GameZombie(GrilleJeu gameSet, Game game, long sleep) {
         
         this.gameSet = gameSet;
         this.game = game;
+        this.sleep = sleep;
 
     }
 
@@ -23,15 +25,15 @@ public class GameZombie extends Thread {
 
     public void run(){
 
-        boolean goOn = game.checkGameEnd(gameSet.getZombies());
-        while (goOn) {
+        // boolean goOn = game.checkGameEnd(gameSet.getZombies());
+        while (true) {
             avancer();
             try {
-                Thread.sleep(5000);
+                Thread.sleep(sleep);
             } catch (Exception e) {
                 System.out.println("FAIL");
             }
-            goOn = game.checkGameEnd(gameSet.getZombies());
+            // goOn = game.checkGameEnd(gameSet.getZombies());
         }
     }
 

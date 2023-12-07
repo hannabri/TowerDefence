@@ -50,9 +50,8 @@ public class GrilleJeu {
         return plantes;
     }
 
-    public Zombie createZombie(Zombie z, Game game, GrilleJeu gameSet) {
+    public Zombie createZombie(Zombie z) {
         zombies.add(z);
-        // z.avancer(gameSet, game);
         return z;
     }
     

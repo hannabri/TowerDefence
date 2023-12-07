@@ -20,10 +20,11 @@ public class Zombie {
     private int vitesse;
 
     public Zombie() {
-        // en foction de la longueur du plateau
+
+        // initialisation au hasard des zombies
         this.location_x = 9;
         Random r = new Random();
-        this.location_y = r.nextInt(4);
+        this.location_y = r.nextInt(5);
 
         setPdv(100);
         setDommage(10);
@@ -113,30 +114,30 @@ public class Zombie {
         }
     }
 
-    public void avancer(GrilleJeu gameSet, Game game) {
-        long lastStep = System.currentTimeMillis();
-            boolean goOn = true;
+    // public void avancer(GrilleJeu gameSet, Game game) {
+    //     long lastStep = System.currentTimeMillis();
+    //         boolean goOn = true;
 
-            while (goOn) {
+    //         while (goOn) {
                 
 
-                if (System.currentTimeMillis() - lastStep >= 5000) {
+    //             if (System.currentTimeMillis() - lastStep >= 5000) {
                     
-                    game.attaque_avance(gameSet.getZombies(), gameSet.getPlantes());
+    //                 game.attaque_avance(gameSet.getZombies(), gameSet.getPlantes());
 
-                    gameSet.afficher();
-                    System.out.println("");
+    //                 gameSet.afficher();
+    //                 System.out.println("");
 
-                    goOn = game.checkGameEnd(gameSet.getZombies());
+    //                 goOn = game.checkGameEnd(gameSet.getZombies());
 
-                    lastStep = System.currentTimeMillis();
-                }
-            }
-            gameSet.afficher();
-
-
+    //                 lastStep = System.currentTimeMillis();
+    //             }
+    //         }
+        //     gameSet.afficher();
 
 
 
-        }
+
+
+        // }
 }
