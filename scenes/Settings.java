@@ -21,11 +21,16 @@ public class Settings extends JFrame {
 
     // Variable pour suivre le mode de jeu choisi
     public static int selectedMode = -1;
+    public static int selectedDifficulty = -1;
 
     // Ajouter une méthode pour obtenir le mode de jeu sélectionné 0 = marathon, 1 = normal
     public int getSelectedMode() {
         return selectedMode;
     }
+    public int getselectedDifficulty() {
+        return selectedDifficulty;
+    }
+
 
     public Settings() {
         // Create a panel
@@ -56,9 +61,14 @@ public class Settings extends JFrame {
             }
         });
 
+
+
         // Set the two switch buttons, mode normal and mode marathon
         JToggleButton normalMode = new JToggleButton("Normal Mode", true);
         JToggleButton marathonMode = new JToggleButton("Marathon Mode", false);
+        JToggleButton mode1 = new JToggleButton("Level 1", true);
+        JToggleButton mode2 = new JToggleButton("Level 2", false);
+        JToggleButton mode3 = new JToggleButton("Level 3", false);
 
 
         // Ajouter des gestionnaires d'événements pour les boutons basculants
@@ -78,15 +88,48 @@ public class Settings extends JFrame {
             }
         });
 
+        mode1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectedDifficulty = 1;
+                System.out.println("Mode choisi : Mode 1 " + selectedDifficulty);
+            }
+        });
+
+        mode2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectedDifficulty = 2;
+                System.out.println("Mode choisi : Mode 2 " + selectedDifficulty);
+            }
+        });
+
+        mode3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectedDifficulty = 3;
+                System.out.println("Mode choisi : Mode 3 " + selectedDifficulty);
+            }
+        });
+
+
         // Add buttons to a group to make them mutually exclusive
         ButtonGroup modeGroup = new ButtonGroup();
         modeGroup.add(normalMode);
         modeGroup.add(marathonMode);
 
+        ButtonGroup difficultyGroup = new ButtonGroup();
+        difficultyGroup.add(mode1);
+        difficultyGroup.add(mode2);
+        difficultyGroup.add(mode3);
+
         // Add components to the panel
         panel.add(normalMode, BorderLayout.CENTER);
         panel.add(marathonMode, BorderLayout.CENTER);
         panel.add(returnButton, BorderLayout.SOUTH);
+        panel.add(mode1, BorderLayout.CENTER);
+        panel.add(mode2, BorderLayout.CENTER);
+        panel.add(mode3, BorderLayout.CENTER);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
