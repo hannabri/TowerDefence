@@ -20,7 +20,7 @@ public class Settings extends JFrame {
     private Game game;
 
     // Variable pour suivre le mode de jeu choisi
-    private int selectedMode = -1;
+    public static int selectedMode = -1;
 
     // Ajouter une méthode pour obtenir le mode de jeu sélectionné 0 = marathon, 1 = normal
     public int getSelectedMode() {
