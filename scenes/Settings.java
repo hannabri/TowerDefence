@@ -19,6 +19,14 @@ public class Settings extends JFrame {
     private JFrame menu;
     private Game game;
 
+    // Variable pour suivre le mode de jeu choisi
+    private int selectedMode = -1;
+
+    // Ajouter une méthode pour obtenir le mode de jeu sélectionné 0 = marathon, 1 = normal
+    public int getSelectedMode() {
+        return selectedMode;
+    }
+
     public Settings() {
         // Create a panel
         JPanel panel = new JPanel();
@@ -35,15 +43,40 @@ public class Settings extends JFrame {
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Si le bouton "Menu" est appuyé sans sélection de mode, utilisez le mode normal par défaut
+                if (selectedMode == -1) {
+                    selectedMode = 1;  // Mode Normal par défaut
+                    System.out.println("Aucun mode choisi difficulté par défaut : Normal: " + selectedMode);
+                }
+
                 // Add code to return to the menu screen
                 menu = new Menu();
                 menu.setVisible(true);
                 dispose();
             }
         });
+
         // Set the two switch buttons, mode normal and mode marathon
         JToggleButton normalMode = new JToggleButton("Normal Mode", true);
         JToggleButton marathonMode = new JToggleButton("Marathon Mode", false);
+
+
+        // Ajouter des gestionnaires d'événements pour les boutons basculants
+        normalMode.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectedMode = 1;  // Mode Normal
+                System.out.println("Mode choisi : Normal " + selectedMode);
+            }
+        });
+
+        marathonMode.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectedMode = 0;
+                System.out.println("Mode choisi : Marathon " + selectedMode);
+            }
+        });
 
         // Add buttons to a group to make them mutually exclusive
         ButtonGroup modeGroup = new ButtonGroup();

@@ -3,16 +3,17 @@ package TowerDefence.scenes;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.plaf.TreeUI;
+
+import TowerDefence.source.GameGUI;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Menu extends JFrame {
-    Highscores h ; // create an instance of the highscores class
-    Settings s;
-    Rules r;
-    Credits c;
-    // Create a panel
+    private JPanel currentPanel; // Track the current panel
 
     public Menu() {
         setTitle("Tower Defence");
@@ -20,15 +21,25 @@ public class Menu extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        currentPanel = createMainMenuPanel();
+        getContentPane().add(currentPanel);
+
+        setVisible(true);
+    }
+
+    private JPanel createMainMenuPanel() {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(6, 1));
+
 
         JButton startButton = new JButton("Start Game");
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Add code to start the game go to the StartGame class
-                System.out.println("Starting the game...");
+                StartGame sg = new StartGame();
+                // gg.setVisible(true);
+                mainPanel.setVisible(false);
             }
         });
 
@@ -104,5 +115,16 @@ public class Menu extends JFrame {
         getContentPane().add(mainPanel);
 
         setVisible(true);
+                // ... (unchanged code for creating buttons)
+
+        return mainPanel;
+    }
+        private void switchToPanel(JPanel newPanel) {
+        getContentPane().remove(currentPanel);
+        currentPanel = newPanel;
+        getContentPane().add(currentPanel);
+        revalidate();
+        repaint();
     }
 }
+
