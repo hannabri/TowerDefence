@@ -1,15 +1,21 @@
 package TowerDefence.source;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Game {
 
+    private long speed;
     private int vagues;
     private ArrayList<Plante> plantesMortes = new ArrayList<>();
     private ArrayList<Zombie> zombiesMorts = new ArrayList<>();
 
-    public Game() {
+    public Game(long speed) {
+        this.speed = speed;
         setVagues(3);
     }
 
@@ -59,11 +65,10 @@ public class Game {
 
     }
 
-    public void avancer(ArrayList<Zombie> zombies, ArrayList<Plante> plantes) {
+    public void attaque_avance(ArrayList<Zombie> zombies, ArrayList<Plante> plantes) {
         System.out.println("");
 
         for (Zombie z : zombies) {
-
 
             z.setX(z.getX() - z.getVitesse());
 
@@ -81,21 +86,86 @@ public class Game {
         }
     }
 
+    public void createZombieVague(GrilleJeu gameSet) {
+        // Liste avec les types de zombies pour initialiser un zombie au hasard
+        
+        Random rnd = new Random();
+        
+        for (int i = 0; i < 3; i++) {
+            int typeZombie = rnd.nextInt(2);
 
-    public static void console_game(String[] args) {
+            switch (typeZombie) {
+                case 0:
+                    gameSet.createZombie(new SuperZombie());
+                    break;
+            
+                default:
+                    gameSet.createZombie(new Zombie());
+                    break;
+            }
+    }
+    }
+
+
+    public static void console_game(String[] args) throws Exception {
         GrilleJeu gameSet = new GrilleJeu();
-        Game game = new Game();
+        Game game = new Game(5000);
 
-        gameSet.createZombie(new SuperZombie());
-        gameSet.createZombie(new Zombie());
-        
-        GamePlante planteThread = new GamePlante(game, gameSet);
-        GameZombie zombieThread = new GameZombie(gameSet, game);
-        zombieThread.run();
-        // planteThread.run();
-        
-        
+        GameZombie zombieThread = new GameZombie(gameSet, game, game.speed);
+        GamePlante plante = new GamePlante(game, gameSet);
 
-    }   
+            
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-}
+        System.out.println("Il vous reste " + gameSet.getArgent() + " d'argent.");
+        System.out.println("Vous pouvez placer des plantes à n'importe quel moment. Préciser d'abord le type et ensuite la position x et y.");
+        System.out.println("1 - La plante basique coûte 10 et atteint un zombie à 1 avec un dommage de 185");
+        System.out.println("2 - La plante carnivore coûte 25 et atteint un zombie à 5 avec un dommage de 50");
+        System.out.println("3 - La rose coûte 50 et atteint un zombie à 3 avec un dommage de 75");
+        System.out.println("Voulez-vous créer une plante basique - 1, une plante carnivore - 2 ou une rose - 3 ?");
+        
+        game.createZombieVague(gameSet);
+        zombieThread.start();
+            
+        
+            try {
+                int v = 0;
+
+                while(game.checkGameEnd(gameSet.getZombies())) {
+
+                    if (gameSet.getZombies().size() < 2 && v < game.getVagues()) {
+                        game.createZombieVague(gameSet);
+                        v ++;
+                    }
+
+                    int typePlante = Integer.valueOf(reader.readLine());
+                    int pos_x = Integer.valueOf(reader.readLine());
+                    int pos_y = Integer.valueOf(reader.readLine());
+
+                    if (pos_x > 9 || pos_y > 4 || GrilleJeu.grille[pos_x][pos_y] == 1) {
+                    System.out.println("La position n'est pas disponible. Entrez une nouvelle position.");
+                    pos_x = reader.read();
+                    pos_y = reader.read();
+                    }
+
+                    plante.createPlante(typePlante, pos_x, pos_y);
+                    
+            }
+
+            } catch (IOException e) {
+            
+                e.printStackTrace();
+
+            } finally {
+                try {
+                    reader.close();
+                    zombieThread.interrupt();
+                } catch (IOException e) {
+                    
+                    e.printStackTrace();
+                }
+            }  
+                
+                
+            }
+        }

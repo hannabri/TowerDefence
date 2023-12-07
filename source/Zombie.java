@@ -1,6 +1,7 @@
 package TowerDefence.source;
 import java.util.Random;
 
+
 public class Zombie {
 
     // Je crois qu'on les initialise dès le début psk ils partent tout du même endroit.
@@ -19,10 +20,11 @@ public class Zombie {
     private int vitesse;
 
     public Zombie() {
-        // en foction de la longueur du plateau
+
+        // initialisation au hasard des zombies
         this.location_x = 9;
         Random r = new Random();
-        this.location_y = r.nextInt(4);
+        this.location_y = r.nextInt(5);
 
         setPdv(100);
         setDommage(10);
@@ -112,19 +114,27 @@ public class Zombie {
         }
     }
 
-    // public void avancer() {
+    // public void avancer(GrilleJeu gameSet, Game game) {
+    //     long lastStep = System.currentTimeMillis();
+    //         boolean goOn = true;
 
+    //         while (goOn) {
+                
 
-        // là faut voir comment on règle l'avancement du zombie. Mais je crois que c'est le principe.
-        // long lastStep = System.currentTimeMillis();
-        //  while(this.getX() >= 0) {
-        //     if (System.currentTimeMillis() - lastStep >= this.getVitesse()) {
-        //         System.out.println(this.toString());
+    //             if (System.currentTimeMillis() - lastStep >= 5000) {
+                    
+    //                 game.attaque_avance(gameSet.getZombies(), gameSet.getPlantes());
 
-        //         this.setX(this.getX() - 1);
-        //         lastStep = System.currentTimeMillis();
-        //     }
-        // }
+    //                 gameSet.afficher();
+    //                 System.out.println("");
+
+    //                 goOn = game.checkGameEnd(gameSet.getZombies());
+
+    //                 lastStep = System.currentTimeMillis();
+    //             }
+    //         }
+        //     gameSet.afficher();
+
 
 
 
