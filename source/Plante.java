@@ -61,8 +61,7 @@ public class Plante {
     public void setReach(int r) {
         this.reach = r;
     }
-
-    // Est-ce qu'il nous faut un getter pour la position?
+    
     public int getX() {
         return location_x;
     }

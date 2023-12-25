@@ -9,8 +9,11 @@ import java.util.Random;
 
 public class Game {
 
+    // dépend du mode: 5 secondes pour niveau 1, 3 secondes pour niveau 2 et 1 seconde pour niveau 3
     private long speed;
     private int vagues;
+
+    // liste avec toutes les plantes et tous les zombies
     private ArrayList<Plante> plantesMortes = new ArrayList<>();
     private ArrayList<Zombie> zombiesMorts = new ArrayList<>();
 
@@ -27,6 +30,9 @@ public class Game {
         return vagues;
     }
 
+    // méthode pour qu'une plante attaque un zombie et vice versa
+    // elle vérifie si la plante / le zombie est mort
+    // les objets morts sont stockés dans une liste séparée pour pouvoir les enlever plus tard
     private void attaquer (ArrayList<Plante> plantes, Zombie z) {
 
         for (Plante p : plantes) {
@@ -47,6 +53,7 @@ public class Game {
         }
     }
 
+    // retourne true si le jeu n'est pas encore fini
     public boolean checkGameEnd(ArrayList<Zombie> zombies) {
 
         if (zombies.isEmpty()) {
@@ -65,6 +72,8 @@ public class Game {
 
     }
 
+    // fait avancer le zombie, la méthode attaque est exécutée à chaque pas du zombie
+    // cette méthode enlève les zombies et plantes mortes de leur liste
     public void attaque_avance(ArrayList<Zombie> zombies, ArrayList<Plante> plantes) {
         System.out.println("");
 
@@ -86,8 +95,8 @@ public class Game {
         }
     }
 
+    // pour une initialisation aléatoire de la liste des zombies
     public void createZombieVague(GrilleJeu gameSet) {
-        // Liste avec les types de zombies pour initialiser un zombie au hasard
         
         Random rnd = new Random();
         
@@ -106,11 +115,14 @@ public class Game {
     }
     }
 
-
+    // gère le jeu dans la console
     public static void console_game(String[] args) throws Exception {
+        
+        // initialiser la grille du jeu et le jeu lui-même
         GrilleJeu gameSet = new GrilleJeu();
         Game game = new Game(5000);
 
+        // créer un thread séparé pour faire avancer les zombies (sans attendre la réponse de l'utilisateur)
         GameZombie zombieThread = new GameZombie(gameSet, game, game.speed);
         GamePlante plante = new GamePlante(game, gameSet);
 

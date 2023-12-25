@@ -96,7 +96,7 @@ public class Zombie {
         return vitesse;
     }
 
-    // Le zombie attque une plante
+    // le zombie attque une plante
     public void attaqueZombie (Plante p) {
         if (! p.estMort() && this.getY() == p.getY() && Math.abs(this.getX() - p.getX()) <= getReach()) {
             System.out.println("ATTAQUE ZOMBIE!");
@@ -114,30 +114,5 @@ public class Zombie {
         }
     }
 
-    // public void avancer(GrilleJeu gameSet, Game game) {
-    //     long lastStep = System.currentTimeMillis();
-    //         boolean goOn = true;
-
-    //         while (goOn) {
-                
-
-    //             if (System.currentTimeMillis() - lastStep >= 5000) {
-                    
-    //                 game.attaque_avance(gameSet.getZombies(), gameSet.getPlantes());
-
-    //                 gameSet.afficher();
-    //                 System.out.println("");
-
-    //                 goOn = game.checkGameEnd(gameSet.getZombies());
-
-    //                 lastStep = System.currentTimeMillis();
-    //             }
-    //         }
-        //     gameSet.afficher();
-
-
-
-
-
-        // }
+    
 }
