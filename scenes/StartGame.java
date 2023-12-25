@@ -9,12 +9,13 @@ import javax.swing.SwingUtilities;
 
 import TowerDefence.graphical_game.GameScreen;
 
-public class StartGame {
+public class StartGame extends JFrame{
     private GameScreen gameScreen;
 
     public StartGame() {
         // Create the GameScreen
-        gameScreen = new GameScreen();
+        new GameScreen();
+
 
     }
 }

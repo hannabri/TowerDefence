@@ -53,6 +53,10 @@ public class Settings extends JFrame {
                     selectedMode = 1;  // Mode Normal par défaut
                     System.out.println("Aucun mode choisi difficulté par défaut : Normal: " + selectedMode);
                 }
+                if (selectedDifficulty == -1) {
+                    selectedDifficulty = 1;  // Mode Normal par défaut
+                    System.out.println("Aucun mode choisi difficulté par défaut : Normal: " + selectedDifficulty);
+                }
 
                 // Add code to return to the menu screen
                 menu = new Menu();
@@ -66,7 +70,7 @@ public class Settings extends JFrame {
         // Set the two switch buttons, mode normal and mode marathon
         JToggleButton normalMode = new JToggleButton("Normal Mode", true);
         JToggleButton marathonMode = new JToggleButton("Marathon Mode", false);
-        JToggleButton mode1 = new JToggleButton("Level 1", true);
+        JToggleButton mode1 = new JToggleButton("Level 1", false);
         JToggleButton mode2 = new JToggleButton("Level 2", false);
         JToggleButton mode3 = new JToggleButton("Level 3", false);
 
@@ -92,7 +96,7 @@ public class Settings extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 selectedDifficulty = 1;
-                System.out.println("Mode choisi : Mode 1 " + selectedDifficulty);
+                System.out.println("Niveau choisi : " + selectedDifficulty);
             }
         });
 
@@ -100,7 +104,7 @@ public class Settings extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 selectedDifficulty = 2;
-                System.out.println("Mode choisi : Mode 2 " + selectedDifficulty);
+                System.out.println("Niveau choisi : " + selectedDifficulty);
             }
         });
 
@@ -108,7 +112,7 @@ public class Settings extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 selectedDifficulty = 3;
-                System.out.println("Mode choisi : Mode 3 " + selectedDifficulty);
+                System.out.println("Niveau choisi : " + selectedDifficulty);
             }
         });
 
@@ -126,10 +130,10 @@ public class Settings extends JFrame {
         // Add components to the panel
         panel.add(normalMode, BorderLayout.CENTER);
         panel.add(marathonMode, BorderLayout.CENTER);
-        panel.add(returnButton, BorderLayout.SOUTH);
         panel.add(mode1, BorderLayout.CENTER);
         panel.add(mode2, BorderLayout.CENTER);
         panel.add(mode3, BorderLayout.CENTER);
+        panel.add(returnButton, BorderLayout.SOUTH);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

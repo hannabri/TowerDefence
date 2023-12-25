@@ -114,15 +114,20 @@ public class Zombie {
         }
     }
 
+    public void setY(int y) {
+        this.location_y = y;
+
+    }
+
     // public void avancer(GrilleJeu gameSet, Game game) {
     //     long lastStep = System.currentTimeMillis();
     //         boolean goOn = true;
 
     //         while (goOn) {
-                
+
 
     //             if (System.currentTimeMillis() - lastStep >= 5000) {
-                    
+
     //                 game.attaque_avance(gameSet.getZombies(), gameSet.getPlantes());
 
     //                 gameSet.afficher();
