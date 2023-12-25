@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import TowerDefence.scenes.Menu;
 
-public class main_file {
+public class Main_file {
     public static void main(String[] args) {
         System.out.println("**********Menu**********\n1. Terminal mode \n2. Graphical mode \nIf not specified, it will be terminal mode \n************************");
         System.out.println("Press the number of the mode you want to play and then press Enter \n************************");
