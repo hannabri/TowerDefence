@@ -3,10 +3,6 @@ package TowerDefence.graphical_game;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -16,6 +12,7 @@ public class GameScreen extends JFrame {
 
     private static final int WIDTH = 700;
     private static final int HEIGHT = 700;
+
 
     public GameScreen() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,10 +33,12 @@ public class GameScreen extends JFrame {
         drawingPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         add(drawingPanel, BorderLayout.CENTER);
 
+        JPanel settings = new JPanel();
+        settings.setBackground(Color.BLACK);
+        // settings.get
+
         // Make the frame visible
         setVisible(true);
     }
-
-
 
 }

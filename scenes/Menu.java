@@ -3,11 +3,6 @@ package TowerDefence.scenes;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.plaf.TreeUI;
-
-import TowerDefence.source.GameGUI;
-
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -115,16 +110,7 @@ public class Menu extends JFrame {
         getContentPane().add(mainPanel);
 
         setVisible(true);
-                // ... (unchanged code for creating buttons)
-
         return mainPanel;
-    }
-        private void switchToPanel(JPanel newPanel) {
-        getContentPane().remove(currentPanel);
-        currentPanel = newPanel;
-        getContentPane().add(currentPanel);
-        revalidate();
-        repaint();
     }
 }
 

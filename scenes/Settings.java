@@ -8,17 +8,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
-
-import TowerDefence.source.Game;
 
 public class Settings extends JFrame {
     private static final int largeur = 300;
     private static final int hauteur = 200;
     private JFrame menu;
-    private Game game;
-
     // Variable pour suivre le mode de jeu choisi
     public static int selectedMode = -1;
     public static int selectedDifficulty = -1;
