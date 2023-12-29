@@ -33,7 +33,7 @@ public class Menu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Add code to start the game go to the StartGame class
                 StartGame sg = new StartGame();
-                // gg.setVisible(true);
+                // sg.setVisible(true);
                 mainPanel.setVisible(false);
             }
         });
