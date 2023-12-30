@@ -3,24 +3,17 @@ package TowerDefence.graphical_game;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Gaulois extends Oval {
-    // Points de vie de l'ami
-    private int pv;
-
-    // Dommage qu'il cause
-    private int dommage;
+public class Ami extends Pion {
 
     // Le coùt
     private int cout;
 
-    // La portée
-    private int reach;
 
-    public Gaulois(int x, int y) {
+    public Ami(int x, int y) {
          super(x, y);
     }
 
-    public Gaulois(int initialY) {
+    public Ami(int initialY) {
         super(initialY);
 
         setPdv(150);

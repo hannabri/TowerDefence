@@ -4,18 +4,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-public class Romains extends Oval {
+public class Enemi extends Pion {
 
-    // Vie de l'enemi
-    private int pv;
+    // ce qu'il nous rapporte
     private int gain;
 
-    // Dommage qu'il cause
-    private int dommage;
-    private int reach;
 
-
-    public Romains(int initialY) {
+    public Enemi(int initialY) {
         super(initialY);
     }
 
@@ -28,7 +23,7 @@ public class Romains extends Oval {
         if (y > FRAME_HEIGHT) {
             y = -size;
             x = getRandomPosition(FRAME_WIDTH);
-            size = OVAL_SIZE;
+            size = PION_SIZE;
         }
     }
 

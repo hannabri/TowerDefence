@@ -17,8 +17,8 @@ public class GameScreen extends JFrame {
     public static final int NUM_ROMAINS = 5;  // Number of moving ovals
 
     public Timer timer;
-    public List<Oval> romains;
-    public List<Oval> gaulois;
+    public List<Pion> enemis;
+    public List<Pion> amis;
 
     public GameScreen() {
         setTitle("Random Ovals");
@@ -26,19 +26,19 @@ public class GameScreen extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        romains = new ArrayList<>();
-        gaulois = new ArrayList<>();
+        enemis = new ArrayList<>();
+        amis = new ArrayList<>();
 
         // Initialize moving ovals to start from the top
         for (int i = 0; i < NUM_ROMAINS; i++) {
-            romains.add(new Romains(0));  // Set y to the top of the frame
+            enemis.add(new Enemi(0));  // Set y to the top of the frame
         }
 
         timer = new Timer(100, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Update the position of each oval
-                for (Oval oval : romains) {
+                for (Pion oval : enemis) {
                     oval.updatePosition();
                 }
 
@@ -52,7 +52,7 @@ public class GameScreen extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // Add a new stationary oval at the click position
-                gaulois.add(new Gaulois(e.getX(), e.getY()));
+                amis.add(new Ami(e.getX(), e.getY()));
                 repaint();
             }
         });
@@ -67,10 +67,10 @@ public class GameScreen extends JFrame {
         g.fillRect(0, 0, getWidth(), getHeight());
 
         // Draw each oval at its updated position
-        for (Oval oval : romains) {
+        for (Pion oval : enemis) {
             oval.draw(g);
         }
-        for (Oval oval : gaulois) {
+        for (Pion oval : amis) {
             oval.draw(g);
         }
     }
