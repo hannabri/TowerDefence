@@ -11,11 +11,7 @@ public abstract class Pion {
     public int x;
     public int y;
     public int size;
-<<<<<<< HEAD
     public double speed;
-=======
-    public double speed; 
->>>>>>> 53d71fe9a881968374a5a6f6dd3152cf10451fce
 
     public int pv; // point de vie
 
@@ -73,7 +69,7 @@ public abstract class Pion {
             return randomNumber * 100 + 25;
         }
 
-        public Object getSpeed() {
+        public double getSpeed() {
             return speed;
         }
     }
