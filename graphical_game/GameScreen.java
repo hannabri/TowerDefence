@@ -17,7 +17,7 @@ public class GameScreen extends JFrame {
     public static final int NUM_ENEMIS = 5;  // Number of moving ovals
 
     public Timer timer;
-    public List<Pion> enemis;
+    public List<Enemi> enemis;
     public List<Ami> amis;
     public List<Projectile> projectiles;
 
@@ -33,21 +33,22 @@ public class GameScreen extends JFrame {
 
         // Initialize moving ovals to start from the top
         for (int i = 0; i < NUM_ENEMIS; i++) {
-            enemis.add(new Enemi(0));  // Set y to the top of the frame
-            projectiles.add(new EnemisProjectile(enemis.get(i).getPositionX(), enemis.get(i).getPositionY() ));
+            Enemi enemi = new Enemi(0);
+            enemis.add(enemi); projectiles.add(new EnemiProjectile(enemi.getPositionX(), enemi.getPositionY()));   // Set y to the top of the frame
         }
 
-        timer = new Timer(200, new ActionListener() {
+        timer = new Timer(100, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Update the position of each oval
-                for (Pion oval : enemis) {
-                    oval.updatePosition();
+                // Update the position of each oval and its projectiles
+                for (Enemi enemi : enemis) {
+                    enemi.updatePosition();
                 }
                 for (Projectile projectile : projectiles) {
                     projectile.updateProjPosition();
                 }
 
+                // Trigger the repaint to draw the updated positions
                 repaint();
             }
         });
@@ -75,8 +76,8 @@ public class GameScreen extends JFrame {
         g.fillRect(0, 0, getWidth(), getHeight());
 
         // Draw each oval at its updated position
-        for (Pion oval : enemis) {
-            oval.draw(g);
+        for (Enemi enemi : enemis) {
+            enemi.draw(g);
         }
         for (Ami ami : amis) {
             ami.draw(g);
@@ -84,5 +85,14 @@ public class GameScreen extends JFrame {
         for (Projectile p : projectiles) {
             p.drawProj(g);
         }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new GameScreen().setVisible(true);
+            }
+        });
     }
 }

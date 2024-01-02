@@ -8,12 +8,12 @@ public abstract class Pion {
     public  int PION_SIZE = GameScreen.OVAL_SIZE;
     public int FRAME_HEIGHT = GameScreen.FRAME_HEIGHT;
 
-    public static int x;
-    public  static int y;
+    public int x;
+    public int y;
     public int size;
     public double speed;
 
-    public static int pv; // point de vie
+    public int pv; // point de vie
 
     public int reach;
 
@@ -37,7 +37,7 @@ public abstract class Pion {
             return x;
         }
 
-        public static int getPositionY() {
+        public int getPositionY() {
             return y;
         }
 

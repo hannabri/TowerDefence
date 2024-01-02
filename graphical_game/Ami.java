@@ -109,8 +109,4 @@ public class Ami extends Pion implements Projectile {
         this.projectileSpeed = speed;
     }
 
-    public static int getPdv() {
-        return pv;
-    }
-
 }

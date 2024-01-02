@@ -9,44 +9,51 @@ import java.util.Random;
 public class Enemi extends Pion implements Projectile {
 
     private int gain;
+    private int dommage;
     private double projectileSpeed = 6.0;
     private int projectileSize = 10;
-    private int dommage;
     private int reach;
     private List<Projectile> projectilesEnemis;
-
 
     public Enemi(int initialY) {
         super(initialY);
         projectilesEnemis = new ArrayList<>();
-        // Additional initialization if needed
-        setPdv(100); // Adjust initial health as needed
-        setDamage(15); // Adjust initial damage as needed
-        setReach(1); // Adjust initial reach as needed
-        setSpeed(0.5); // Set your desired speed for Enemi's projectiles
+
+        setGain(50);
+        setPdv(100);
+        setDamage(15);
+        setReach(1);
+        setSpeed(0.5);
     }
 
+    // Methods related to updating the enemy position and its projectiles
     @Override
     public void updatePosition() {
-        // TODO BREAK THE GAME
+        moveDownward();
         for (Projectile projectile : projectilesEnemis) {
             projectile.updateProjPosition();
         }
-        // Update the oval position for downward movement
-        y += 5;
-
-        // If the oval goes beyond the frame, reset its position
-        if (y > FRAME_HEIGHT) {
-            y = -size;
-            x = getRandomPosition(FRAME_WIDTH);
-            size = PION_SIZE;
-        }
     }
 
+    private void moveDownward() {
+        y += 5;
+    }
+
+    // Methods related to drawing
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.WHITE);
         g.drawOval(x, y, size, size);
+
+        // Draw projectiles
+        for (Projectile projectile : projectilesEnemis) {
+            projectile.drawProj(g);
+        }
+    }
+
+    public void createProjectile(){
+        Projectile projectile = new EnemiProjectile(x, y);
+        projectilesEnemis.add(projectile);
     }
 
     public boolean estMort() {
@@ -75,6 +82,10 @@ public class Enemi extends Pion implements Projectile {
         return dommage;
     }
 
+    public void setProjectileSpeed(double speed) {
+        this.projectileSpeed = speed;
+    }
+
     @Override
     public double[] getPosition() {
         return new double[]{x, y};
@@ -99,7 +110,7 @@ public class Enemi extends Pion implements Projectile {
     @Override
     public void updateProjPosition() {
         // Implement the logic to update the position of Enemi's projectile
-       y += projectileSpeed;
+       y += speed;
     }
 
     @Override
