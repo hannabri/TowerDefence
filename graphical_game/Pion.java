@@ -11,6 +11,7 @@ public abstract class Pion {
     public int x;
     public int y;
     public int size;
+    public double speed; 
 
     public int pv; // point de vie
 
@@ -20,7 +21,7 @@ public abstract class Pion {
 
     public Pion(int initialY) {
         // Initialize the oval position and size
-        x = getRandomPosition(FRAME_WIDTH);
+        x = getRandomPosition(8);
         y = initialY;
         size = PION_SIZE;
         }
@@ -58,9 +59,13 @@ public abstract class Pion {
             this.pv = (int) speed;
         }
 
+        public double getSpeed(){
+            return speed;
+        }
 
         private int getRandomPosition(int maxValue) {
             Random random = new Random();
-            return random.nextInt(maxValue);
+            int randomNumber =  random.nextInt(maxValue);
+            return randomNumber * 100 + 25;
         }
     }

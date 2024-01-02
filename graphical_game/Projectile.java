@@ -9,9 +9,6 @@ public interface Projectile {
     // Set the position of the projectile
     void setPosition(int x, int y);
 
-    // Get the speed of the projectile
-    double getSpeed();
-
     // Get the damage of the projectile
     int getDamage();
 
