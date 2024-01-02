@@ -14,8 +14,6 @@ public abstract class Pion {
 
     public int pv; // point de vie
 
-    public int dommage;
-
     public int reach;
 
 
@@ -34,9 +32,32 @@ public abstract class Pion {
             size = PION_SIZE;
         }
 
+        public int getPositionX() {
+            return x;
+        }
+
+        public int getPositionY() {
+            return y;
+        }
+
         public abstract void updatePosition();
 
         public abstract void draw(Graphics g);
+
+        public abstract boolean estMort();
+
+        public abstract void setPdv(int vie);
+
+        public abstract void setReach(int reach);
+
+        public void setDamage(int dommage) {
+            this.pv = dommage;
+        }
+
+        public void setSpeed(double speed) {
+            this.pv = (int) speed;
+        }
+
 
         private int getRandomPosition(int maxValue) {
             Random random = new Random();

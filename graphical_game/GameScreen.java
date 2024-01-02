@@ -14,11 +14,13 @@ public class GameScreen extends JFrame {
     public static final int FRAME_WIDTH = 800;
     public static final int FRAME_HEIGHT = 600;
     public static final int OVAL_SIZE = 20;
-    public static final int NUM_ROMAINS = 5;  // Number of moving ovals
+    public static final int NUM_ENEMIS = 5;  // Number of moving ovals
 
     public Timer timer;
     public List<Pion> enemis;
     public List<Pion> amis;
+    public List<Projectile> projectiles;
+
 
     public GameScreen() {
         setTitle("Random Ovals");
@@ -28,11 +30,13 @@ public class GameScreen extends JFrame {
 
         enemis = new ArrayList<>();
         amis = new ArrayList<>();
+        projectiles = new ArrayList<>();
 
         // Initialize moving ovals to start from the top
-        for (int i = 0; i < NUM_ROMAINS; i++) {
+        for (int i = 0; i < NUM_ENEMIS; i++) {
             enemis.add(new Enemi(0));  // Set y to the top of the frame
         }
+
 
         timer = new Timer(100, new ActionListener() {
             @Override
@@ -72,6 +76,9 @@ public class GameScreen extends JFrame {
         }
         for (Pion oval : amis) {
             oval.draw(g);
+        }
+        for (Projectile p : projectiles) {
+            p.drawProj(g);
         }
     }
 

@@ -4,18 +4,26 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-public class Enemi extends Pion {
+public class Enemi extends Pion implements Projectile {
 
-    // ce qu'il nous rapporte
     private int gain;
-
+    private double projectileSpeed;
+    private int projectileSize = 10;
+    private int dommage;
+    private int reach;
 
     public Enemi(int initialY) {
         super(initialY);
+        // Additional initialization if needed
+        setPdv(100); // Adjust initial health as needed
+        setDamage(15); // Adjust initial damage as needed
+        setReach(1); // Adjust initial reach as needed
+        setSpeed(1.5); // Set your desired speed for Enemi's projectiles
     }
 
     @Override
     public void updatePosition() {
+        // TODO BREAK THE GAME
         // Update the oval position for downward movement
         y += 5;
 
@@ -33,11 +41,6 @@ public class Enemi extends Pion {
         g.drawOval(x, y, size, size);
     }
 
-    private int getRandomPosition(int maxValue) {
-        Random random = new Random();
-        return random.nextInt(maxValue);
-    }
-
     public boolean estMort() {
         if (this.pv <= 0) {
             return true;
@@ -45,19 +48,66 @@ public class Enemi extends Pion {
         return false;
     }
 
+    @Override
     public void setPdv(int vie) {
         this.pv = vie;
     }
 
-    public void setDommage(int d) {
-        this.dommage = d;
+    public void setGain(int gain) {
+        this.gain = gain;
     }
 
-    public void setGain(int g) {
-        this.gain = g;
+    @Override
+    public void setReach(int reach) {
+        this.reach = reach;
     }
 
-    public void setReach(int r) {
-        this.reach = r;
+    @Override
+    public int getDamage() {
+        return dommage;
+    }
+
+    @Override
+    public double[] getPosition() {
+        return new double[]{x, y};
+    }
+
+    @Override
+    public double getSpeed() {
+        return projectileSpeed;
+    }
+
+    @Override
+    public void setDamage(int damage) {
+        this.dommage = damage;
+    }
+
+    @Override
+    public void setPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    @Override
+    public void setSpeed(double speed) {
+        this.projectileSpeed = speed;
+    }
+
+    @Override
+    public void updateProjPosition() {
+        // Implement the logic to update the position of Enemi's projectile
+       y += projectileSpeed;
+    }
+
+    @Override
+    public void drawProj(Graphics g) {
+        // Example: Draw a red rectangle for Enemi's projectile
+        g.setColor(Color.RED);
+        g.fillRect((int) x, (int) y, projectileSize, projectileSize);
+    }
+
+    private int getRandomPosition(int maxValue) {
+        Random random = new Random();
+        return random.nextInt(maxValue);
     }
 }
