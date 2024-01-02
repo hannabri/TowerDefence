@@ -18,12 +18,11 @@ public class GameScreen extends JFrame {
 
     public Timer timer;
     public List<Pion> enemis;
-    public List<Pion> amis;
+    public List<Ami> amis;
     public List<Projectile> projectiles;
 
-
     public GameScreen() {
-        setTitle("Random Ovals");
+        setTitle("Tower Defence Game");
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -35,15 +34,18 @@ public class GameScreen extends JFrame {
         // Initialize moving ovals to start from the top
         for (int i = 0; i < NUM_ENEMIS; i++) {
             enemis.add(new Enemi(0));  // Set y to the top of the frame
+            projectiles.add(new EnemisProjectile(enemis.get(i).getPositionX(), enemis.get(i).getPositionY() ));
         }
 
-
-        timer = new Timer(100, new ActionListener() {
+        timer = new Timer(200, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Update the position of each oval
                 for (Pion oval : enemis) {
                     oval.updatePosition();
+                }
+                for (Projectile projectile : projectiles) {
+                    projectile.updateProjPosition();
                 }
 
                 repaint();
@@ -56,7 +58,9 @@ public class GameScreen extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 // Add a new stationary oval at the click position
-                amis.add(new Ami(e.getX(), e.getY()));
+                Ami ami = new Ami(e.getX(), e.getY());
+                amis.add(ami);
+                projectiles.add(new AmiProjectile(ami.getPositionX(), ami.getPositionY()));
                 repaint();
             }
         });
@@ -74,12 +78,11 @@ public class GameScreen extends JFrame {
         for (Pion oval : enemis) {
             oval.draw(g);
         }
-        for (Pion oval : amis) {
-            oval.draw(g);
+        for (Ami ami : amis) {
+            ami.draw(g);
         }
         for (Projectile p : projectiles) {
             p.drawProj(g);
         }
     }
-
 }

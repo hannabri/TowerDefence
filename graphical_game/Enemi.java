@@ -2,28 +2,36 @@ package TowerDefence.graphical_game;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Enemi extends Pion implements Projectile {
 
     private int gain;
-    private double projectileSpeed;
+    private double projectileSpeed = 6.0;
     private int projectileSize = 10;
     private int dommage;
     private int reach;
+    private List<Projectile> projectilesEnemis;
+
 
     public Enemi(int initialY) {
         super(initialY);
+        projectilesEnemis = new ArrayList<>();
         // Additional initialization if needed
         setPdv(100); // Adjust initial health as needed
         setDamage(15); // Adjust initial damage as needed
         setReach(1); // Adjust initial reach as needed
-        setSpeed(1.5); // Set your desired speed for Enemi's projectiles
+        setSpeed(0.5); // Set your desired speed for Enemi's projectiles
     }
 
     @Override
     public void updatePosition() {
         // TODO BREAK THE GAME
+        for (Projectile projectile : projectilesEnemis) {
+            projectile.updateProjPosition();
+        }
         // Update the oval position for downward movement
         y += 5;
 
@@ -70,11 +78,6 @@ public class Enemi extends Pion implements Projectile {
     @Override
     public double[] getPosition() {
         return new double[]{x, y};
-    }
-
-    @Override
-    public double getSpeed() {
-        return projectileSpeed;
     }
 
     @Override

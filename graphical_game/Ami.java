@@ -7,22 +7,16 @@ import java.util.List;
 
 public class Ami extends Pion implements Projectile {
 
-    // Le coùt
     private int cout;
-    // Le dommage
     private int dommage;
     private double projectileSpeed;
     private int projectileSize = 10; // Set your desired projectile size
-    private List<Projectile> projectiles;
+    private List<Projectile> projectilesAmis;
+    public int length;
 
     public Ami(int x, int y) {
         super(x, y);
-        projectiles = new ArrayList<>();
-        // Additional initialization if needed
-    }
-
-    public Ami(int initialY) {
-        super(initialY);
+        projectilesAmis = new ArrayList<>();
 
         setPdv(150);
         setCout(10);
@@ -34,7 +28,7 @@ public class Ami extends Pion implements Projectile {
     @Override
     public void updatePosition() {
         // Stationary ovals do not move
-        for (Projectile projectile : projectiles) {
+        for (Projectile projectile : projectilesAmis) {
             projectile.updateProjPosition();
         }
     }
@@ -45,7 +39,7 @@ public class Ami extends Pion implements Projectile {
         g.drawOval(x, y, size, size);
 
         // Draw projectiles
-        for (Projectile projectile : projectiles) {
+        for (Projectile projectile : projectilesAmis) {
             projectile.drawProj(g);
         }
     }
@@ -53,8 +47,7 @@ public class Ami extends Pion implements Projectile {
     // Method to create a new projectile
     public void createProjectile() {
         Projectile projectile = new AmiProjectile(x, y);
-        projectile.getSpeed(); // Set the projectile speed based on Ami's speed
-        projectiles.add(projectile);
+        projectilesAmis.add(projectile);
     }
 
     public boolean estMort() {
@@ -94,11 +87,6 @@ public class Ami extends Pion implements Projectile {
     }
 
     @Override
-    public double getSpeed() {
-        return projectileSpeed;
-    }
-
-    @Override
     public int getDamage() {
         return dommage;
     }
@@ -120,4 +108,9 @@ public class Ami extends Pion implements Projectile {
     public void setSpeed(double speed) {
         this.projectileSpeed = speed;
     }
+
+    public static int getPdv() {
+        return pv;
+    }
+
 }

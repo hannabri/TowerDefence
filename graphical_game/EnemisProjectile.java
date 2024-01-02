@@ -7,7 +7,7 @@ class EnemisProjectile implements Projectile{
 
     public int x;
     public int y;
-    public double speed = 2.0;
+    public double speed = .0;
     public int damage = 20;
 
     EnemisProjectile(int x, int y) {
@@ -27,11 +27,6 @@ class EnemisProjectile implements Projectile{
     }
 
     @Override
-    public double getSpeed() {
-        return speed;
-    }
-
-    @Override
     public int getDamage() {
         return damage;
     }
@@ -39,13 +34,13 @@ class EnemisProjectile implements Projectile{
     @Override
     public void updateProjPosition() {
         // for downward movement
-       y += 5;
+       y += speed;
     }
 
     @Override
     public void drawProj(Graphics g) {
         // Example: Draw a red rectangle for Enemi's projectile
-        g.setColor(Color.RED);
+        g.setColor(Color.BLUE);
         int projectileSize = 10; // Set your desired projectile size
         g.fillRect((int) x, (int) y, projectileSize, projectileSize);
     }

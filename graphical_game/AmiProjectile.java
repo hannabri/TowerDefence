@@ -27,11 +27,6 @@ class AmiProjectile implements Projectile{
     }
 
     @Override
-    public double getSpeed() {
-        return speed;
-    }
-
-    @Override
     public int getDamage() {
         return damage;
     }
@@ -45,7 +40,7 @@ class AmiProjectile implements Projectile{
     @Override
     public void drawProj(Graphics g) {
         // Example: Draw a red rectangle for Enemi's projectile
-        g.setColor(Color.BLUE);
+        g.setColor(Color.RED);
         int projectileSize = 10; // Set your desired projectile size
         g.fillRect((int) x, (int) y, projectileSize, projectileSize);
     }
