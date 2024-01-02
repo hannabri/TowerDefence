@@ -120,8 +120,9 @@ public class Enemi extends Pion implements Projectile {
         g.fillRect((int) x, (int) y, projectileSize, projectileSize);
     }
 
-    private int getRandomPosition(int maxValue) {
-        Random random = new Random();
-        return random.nextInt(maxValue);
+    @Override
+    public double getSpeed() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getSpeed'");
     }
 }

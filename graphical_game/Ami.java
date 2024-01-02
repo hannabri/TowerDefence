@@ -94,7 +94,7 @@ public class Ami extends Pion implements Projectile {
     @Override
     public void updateProjPosition() {
         // Implement the logic to update the position of Ami's projectile
-        y += projectileSpeed;
+        y += speed;
     }
 
     @Override
@@ -109,4 +109,8 @@ public class Ami extends Pion implements Projectile {
         this.projectileSpeed = speed;
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 53d71fe9a881968374a5a6f6dd3152cf10451fce
