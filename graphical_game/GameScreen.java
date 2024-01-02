@@ -18,10 +18,6 @@ public class GameScreen extends JFrame {
 
     public static final int FRAME_WIDTH = 800;
     public static final int FRAME_HEIGHT = 600;
-<<<<<<< HEAD
-    public static final int OVAL_SIZE = 20;
-    public static final int NUM_ENEMIS = 5;  // Number of moving ovals
-=======
     public static final int OVAL_SIZE = 50;
     public static final int NUM_ENEMIS = 5;  // Number of moving ovals
     
@@ -30,19 +26,10 @@ public class GameScreen extends JFrame {
     public List<Enemi> enemis;
     public List<Ami> amis;
     public List<Projectile> projectiles;
->>>>>>> 53d71fe9a881968374a5a6f6dd3152cf10451fce
 
-    public Timer timer;
-    public List<Enemi> enemis;
-    public List<Ami> amis;
-    public List<Projectile> projectiles;
 
     public GameScreen() {
-<<<<<<< HEAD
-        setTitle("Tower Defence Game");
-=======
         setTitle("Tower Defence");
->>>>>>> 53d71fe9a881968374a5a6f6dd3152cf10451fce
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -51,31 +38,13 @@ public class GameScreen extends JFrame {
         amis = new ArrayList<>();
         projectiles = new ArrayList<>();
 
-<<<<<<< HEAD
-        // Initialize moving ovals to start from the top
-        for (int i = 0; i < NUM_ENEMIS; i++) {
-            Enemi enemi = new Enemi(0);
-            enemis.add(enemi); projectiles.add(new EnemiProjectile(enemi.getPositionX(), enemi.getPositionY()));   // Set y to the top of the frame
-        }
-=======
         startNextWave();
 
->>>>>>> 53d71fe9a881968374a5a6f6dd3152cf10451fce
 
         timer = new Timer(100, new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
-                // Update the position of each oval and its projectiles
-                for (Enemi enemi : enemis) {
-                    enemi.updatePosition();
-                }
-                for (Projectile projectile : projectiles) {
-                    projectile.updateProjPosition();
-                }
-
-                // Trigger the repaint to draw the updated positions
-=======
 
                 // Update the position of each oval
                 updateEnemis();
@@ -84,7 +53,6 @@ public class GameScreen extends JFrame {
 
                 updatePositionEnemi();
 
->>>>>>> 53d71fe9a881968374a5a6f6dd3152cf10451fce
                 repaint();
             }
         });
@@ -97,10 +65,6 @@ public class GameScreen extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 Ami ami = new Ami (e.getX(), e.getY()); 
                 // Add a new stationary oval at the click position
-<<<<<<< HEAD
-                Ami ami = new Ami(e.getX(), e.getY());
-=======
->>>>>>> 53d71fe9a881968374a5a6f6dd3152cf10451fce
                 amis.add(ami);
                 projectiles.add(new AmiProjectile(ami.getPositionX(), ami.getPositionY()));
                 repaint();
@@ -108,8 +72,6 @@ public class GameScreen extends JFrame {
         });
     }
 
-<<<<<<< HEAD
-=======
     public void updatePositionEnemi() {
         for (Pion oval : enemis) {
             oval.updatePosition(); 
@@ -166,7 +128,6 @@ public class GameScreen extends JFrame {
         }
     }
 
->>>>>>> 53d71fe9a881968374a5a6f6dd3152cf10451fce
     @Override
     public void paint(Graphics g) {
         super.paint(g);        
@@ -185,19 +146,11 @@ public class GameScreen extends JFrame {
         
 
         // Draw each oval at its updated position
-<<<<<<< HEAD
-        for (Enemi enemi : enemis) {
-            enemi.draw(g);
-        }
-        for (Ami ami : amis) {
-            ami.draw(g);
-=======
         for (Enemi oval : enemis) {
             oval.draw(g);
         }
         for (Ami oval : amis) {
             oval.draw(g);
->>>>>>> 53d71fe9a881968374a5a6f6dd3152cf10451fce
         }
         for (Projectile p : projectiles) {
             p.drawProj(g);
@@ -205,12 +158,4 @@ public class GameScreen extends JFrame {
 
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new GameScreen().setVisible(true);
-            }
-        });
-    }
 }
