@@ -14,12 +14,13 @@ public class GameScreen extends JFrame {
     public static final int FRAME_WIDTH = 800;
     public static final int FRAME_HEIGHT = 600;
     public static final int OVAL_SIZE = 20;
-    public static final int NUM_ENEMIS = 5;  // Number of moving ovals
-
+    
+    public int vague = 3;
     public Timer timer;
     public List<Pion> enemis;
     public List<Pion> amis;
     public List<Projectile> projectiles;
+    public static final int NUM_ENEMIS = 5;  // Number of moving ovals
 
 
     public GameScreen() {
@@ -32,19 +33,23 @@ public class GameScreen extends JFrame {
         amis = new ArrayList<>();
         projectiles = new ArrayList<>();
 
-        // Initialize moving ovals to start from the top
-        for (int i = 0; i < NUM_ENEMIS; i++) {
-            enemis.add(new Enemi(0));  // Set y to the top of the frame
-        }
+
+        startNextWave();
 
 
         timer = new Timer(100, new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Update the position of each oval
+        
                 for (Pion oval : enemis) {
                     oval.updatePosition();
                 }
+
+                updateEnemis();
+
+
 
                 repaint();
             }
@@ -60,6 +65,41 @@ public class GameScreen extends JFrame {
                 repaint();
             }
         });
+    }
+
+    public List<Pion> updateEnemis() {
+        for (Pion oval : enemis) {
+            if (oval.estMort()) {
+                enemis.remove(oval);
+            }
+        }
+        return enemis;
+    }
+
+    public boolean hasNextWave(int i) {
+        // verify if there is another enemy wave
+
+        if (i >= vague) {
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public void startNextWave() {
+        int w = 1;
+        if (enemis.isEmpty()) {
+            if (hasNextWave(w)) {
+                w ++;
+                for (int i = 0; i < NUM_ENEMIS; i++) {
+                    enemis.add(new Enemi(0));  // Set y to the top of the frame
+                } 
+            } else {
+                // end the game! --> amis ont gagné!
+            }
+            
+        }
     }
 
     @Override

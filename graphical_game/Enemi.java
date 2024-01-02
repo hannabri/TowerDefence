@@ -10,7 +10,7 @@ public class Enemi extends Pion implements Projectile {
     private double projectileSpeed;
     private int projectileSize = 10;
     private int dommage;
-    private int reach;
+    
 
     public Enemi(int initialY) {
         super(initialY);
@@ -18,7 +18,7 @@ public class Enemi extends Pion implements Projectile {
         setPdv(100); // Adjust initial health as needed
         setDamage(15); // Adjust initial damage as needed
         setReach(1); // Adjust initial reach as needed
-        setSpeed(1.5); // Set your desired speed for Enemi's projectiles
+        setSpeed(1.5); // Set your desired speed for Enemi's projectiles    
     }
 
     @Override
