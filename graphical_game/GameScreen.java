@@ -2,6 +2,8 @@ package TowerDefence.graphical_game;
 
 import javax.swing.*;
 
+import org.w3c.dom.ranges.Range;
+
 import TowerDefence.scenes.GameOver;
 import TowerDefence.scenes.Win;
 
@@ -11,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
+import java.time.temporal.ValueRange;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +56,8 @@ public class GameScreen extends JFrame {
 
                 updatePositionEnemi();
 
+                updatePositionEnemiProj();
+
                 repaint();
             }
         });
@@ -77,17 +82,41 @@ public class GameScreen extends JFrame {
             oval.updatePosition(); 
             if (oval.getPositionY() > FRAME_HEIGHT) {
                 timer.stop();
+                System.out.println("Game Over");
                 GameOver gameOver = new GameOver();
                 gameOver.setVisible(true);
             }
         }
+    }
+
+    public void updatePositionEnemiProj() {
 
         for (Projectile projectile : projectiles){
             projectile.updateProjPosition();
 
+            for (Ami ami : amis) {
+                if (collideWithAmi(projectile, ami)) {
+                    enemiProjCollideAmi(projectile, ami);
+                    System.out.println(ami + " a perdu " + projectile.getDamage() + " points de vie. Il lui reste " + ami.pv + " points de vie.");
+                }
+            }
+
         }
     }
 
+    public boolean collideWithAmi(Projectile p, Pion a) {
+        final ValueRange rangeX = ValueRange.of((int)p.getPosition()[0] - 20, (int)p.getPosition()[0] + 80);
+        final ValueRange rangeY = ValueRange.of(a.getPositionX() - 2, a.getPositionX() + 2);
+
+        if (rangeY.isValidIntValue((int) p.getPosition()[1]) && rangeX.isValidIntValue(a.getPositionX())) {
+            return true;
+        }
+        return false;
+    }
+
+    public void enemiProjCollideAmi(Projectile p, Ami a) {
+        a.setPdv(a.pv - p.getDamage());
+    }
     
     public List<Enemi> updateEnemis() {
         for (Pion oval : enemis) {
@@ -121,6 +150,7 @@ public class GameScreen extends JFrame {
                 } 
             } else {
                 timer.stop();
+                System.out.println("You won!");
                 Win win = new Win();
                 win.setVisible(true);
             }
