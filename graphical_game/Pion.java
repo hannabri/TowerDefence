@@ -69,8 +69,9 @@ public abstract class Pion {
             return randomNumber * 100 + 25;
         }
 
-        public int getReach() {
-            return reach;
+
+        public int getSpeed(int speed) {
+            return speed;
         }
 }
 
