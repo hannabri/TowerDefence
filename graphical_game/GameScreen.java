@@ -18,7 +18,7 @@ public class GameScreen extends JFrame {
 
     public static final int FRAME_WIDTH = 800;
     public static final int FRAME_HEIGHT = 600;
-    public static final int OVAL_SIZE = 20;
+    public static final int OVAL_SIZE = 50;
     public static final int NUM_ENEMIS = 5;  // Number of moving ovals
 
     public Timer timer;
