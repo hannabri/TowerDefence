@@ -2,9 +2,14 @@ package TowerDefence.graphical_game;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javax.swing.Action;
 
 public class Enemi extends Pion implements Projectile {
 
@@ -14,6 +19,8 @@ public class Enemi extends Pion implements Projectile {
     private int projectileSize = 10;
     private int reach;
     private List<Projectile> projectilesEnemis;
+    private Timer projectileTimer;
+    private int projectileInterval = 2000; // 2 seconds
 
     public Enemi(int initialY) {
         super(initialY);
@@ -24,6 +31,18 @@ public class Enemi extends Pion implements Projectile {
         setDamage(15);
         setReach(1);
         setSpeed(0.5);
+
+        projectileTimer = new Timer();
+        projectileTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                createProjectile();
+            }
+        }, 0, projectileInterval);
+    }
+
+    public void actionPerformed(ActionEvent e){
+        createProjectile();
     }
 
     // Methods related to updating the enemy position and its projectiles
@@ -58,6 +77,7 @@ public class Enemi extends Pion implements Projectile {
 
     public boolean estMort() {
         if (this.pv <= 0) {
+            projectileTimer.cancel();
             return true;
         }
         return false;
@@ -109,7 +129,7 @@ public class Enemi extends Pion implements Projectile {
 
     @Override
     public void updateProjPosition() {
-        // Implement the logic to update the position of Enemi's projectile
+        // for downward movement of projectile
        y += speed;
     }
 

@@ -2,8 +2,12 @@ package TowerDefence.graphical_game;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class Ami extends Pion implements Projectile {
 
@@ -13,6 +17,8 @@ public class Ami extends Pion implements Projectile {
     private int projectileSize = 10; // Set your desired projectile size
     private List<Projectile> projectilesAmis;
     public int length;
+    private Timer projectileTimer;
+    private int projectileInterval = 2000; // 2 seconds
 
     public Ami(int x, int y) {
         super(x, y);
@@ -23,6 +29,14 @@ public class Ami extends Pion implements Projectile {
         setDamage(20);
         setReach(1);
         setProjectileSpeed(2.0); // Set your desired projectile speed
+
+        projectileTimer = new Timer();
+        projectileTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                createProjectile();
+            }
+        }, 0, projectileInterval);
     }
 
     @Override
@@ -31,6 +45,10 @@ public class Ami extends Pion implements Projectile {
         for (Projectile projectile : projectilesAmis) {
             projectile.updateProjPosition();
         }
+    }
+
+    public void actionPerformed(ActionEvent e){
+        createProjectile();
     }
 
     @Override
@@ -51,7 +69,11 @@ public class Ami extends Pion implements Projectile {
     }
 
     public boolean estMort() {
-        return this.pv <= 0;
+        if (this.pv <= 0){
+            projectileTimer.cancel();
+            return true;
+        }
+        return false;
     }
 
     public void setPdv(int vie) {
@@ -93,8 +115,8 @@ public class Ami extends Pion implements Projectile {
 
     @Override
     public void updateProjPosition() {
-        // Implement the logic to update the position of Ami's projectile
-        y += speed;
+        // for upward movement of projectile
+        y -= projectileSpeed;
     }
 
     @Override

@@ -8,7 +8,7 @@ class AmiProjectile implements Projectile{
     public int x;
     public int y;
     public double speed = 2.0;
-    public int damage = 20;
+    public int damage = 200;
 
     AmiProjectile(int x, int y) {
         this.x = x;
