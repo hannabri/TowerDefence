@@ -24,7 +24,7 @@ public class GameOver extends JFrame {
         setLocationRelativeTo(null);
 
         // Create an ImagePanel to display an image
-        ImagePanel imagePanel = new ImagePanel(image);
+        ImagePanel imagePanel = new ImagePanel();
         add(imagePanel, BorderLayout.CENTER);
 
         // Create a button to return to the menu screen
@@ -46,19 +46,17 @@ public class GameOver extends JFrame {
 
     // Inner class for ImagePanel
     private class ImagePanel extends JPanel {
-        private BufferedImage image;
 
-        public ImagePanel(BufferedImage image) {
-            this.image = image;
+        public ImagePanel() {
             importImg();
         }
 
         private void importImg() {
-            try (InputStream is = getClass().getResourceAsStream("/gameover.jpg")) {
+            try (InputStream is = getClass().getResourceAsStream("../res/GameOver.jpg")) {
                 if (is != null) {
                     image = ImageIO.read(is);
                 } else {
-                    System.err.println("Image not found: /gameover.png");
+                    System.err.println("Image not found: /GameOver.jpg");
                 }
             } catch (IOException e) {
                 e.printStackTrace();

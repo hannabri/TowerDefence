@@ -63,7 +63,7 @@ public class Win extends JFrame {
         }
 
         private void importImg() {
-            try (InputStream is = getClass().getResourceAsStream("/YouWin.png")) {
+            try (InputStream is = getClass().getResourceAsStream("../res/YouWin.png")) {
                 if (is != null) {
                     image = ImageIO.read(is);
                 } else {
