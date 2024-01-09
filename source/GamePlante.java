@@ -19,21 +19,21 @@ public class GamePlante{
 
             case 1:
                 p = new Plante(pos_x, pos_y);
-                System.out.println("Une Plante a été créée.");
+                System.out.println("You created a flower.");
                 break;
 
             case 2:
                 p = new PlanteCarnivore(pos_x, pos_y);
-                System.out.println("Une plante carnivore a été créée.");
+                System.out.println("You created a carnivore flower.");
                 break;
 
             case 3:
                 p = new Rose(pos_x, pos_y);
-                System.out.println("Une rose a été créée.");
+                System.out.println("You created a rose.");
                 break;
 
             default:
-                System.out.println("Aucune plante n'a été créée.");
+                System.out.println("No flower has been created.");
                 p = null;
                 break;
         }
@@ -61,7 +61,7 @@ public class GamePlante{
 
                 gameSet.afficher();
 
-                System.out.println("Il vous reste " + gameSet.getArgent() + " d'argent.");
+                System.out.println("You still have " + gameSet.getArgent() + " money.");
             }
 }
 

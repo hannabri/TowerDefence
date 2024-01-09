@@ -9,11 +9,10 @@ import java.util.Random;
 
 public class Game {
 
-    // dépend du mode: 5 secondes pour niveau 1, 3 secondes pour niveau 2 et 1 seconde pour niveau 3
     private long speed;
     private int vagues;
 
-    // liste avec toutes les plantes et tous les zombies
+    // one list with all the flowers and one with all the enmies
     private ArrayList<Plante> plantesMortes = new ArrayList<>();
     private ArrayList<Zombie> zombiesMorts = new ArrayList<>();
 
@@ -56,7 +55,7 @@ public class Game {
     public boolean checkGameEnd(ArrayList<Zombie> zombies) {
 
         if (zombies.isEmpty()) {
-            System.out.println("Les plantes ont gagnées!");
+            System.out.println("The flowers win!");
             return false;
         }
 
@@ -171,7 +170,7 @@ public class Game {
                     int pos_y = Integer.valueOf(reader.readLine());
 
                     if (pos_x > 9 || pos_y > 4 || GrilleJeu.grille[pos_x][pos_y] == "P") {
-                    System.out.println("La position n'est pas disponible. Entrez une nouvelle position.");
+                    System.out.println("This position is already occupied. Please enter a new position.");
                     pos_y = reader.read();
                     pos_x = reader.read();
                     }

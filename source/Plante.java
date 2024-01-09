@@ -28,7 +28,7 @@ public class Plante {
 
         if (GrilleJeu.argent < getCout()) {
             setPdv(0);
-            System.out.println("L'argent n'est pas suffisant pour acheter une plante");
+            System.out.println("You do not have enough money to create another flower.");
         } else {
             setPdv(200);
             GrilleJeu.argent -= getCout();
@@ -36,7 +36,7 @@ public class Plante {
     }
 
     public String toString () {
-        return "La " + this.getClass() + " se trouve à la position " + getX() + ", " + getY() + ", elle a encore " + getPdv() + " points de vie elle atteint le zombie à " + getReach() + ".";
+        return "The " + this.getClass() + " is at " + getX() + ", " + getY() + ", and it still has " + getPdv() + " health points. It reaches the enemy at " + getReach() + ".";
     }
 
     public boolean estMort() {
@@ -90,7 +90,7 @@ public class Plante {
     public void attaquePlante (Zombie z) {
         int test = Math.abs(this.getX() - z.getX());
         if (! z.estMort() && test <= getReach()){
-            System.out.println("ATTAQUE PLANTE!");
+            System.out.println("FLOWER ATTACK!");
             z.recoitAttaque(this.getDommage());
             System.out.println(z.toString());
         }
@@ -101,7 +101,7 @@ public class Plante {
         this.pdv =  this.pdv - d;
 
         if (this.estMort()) {
-            System.out.println("Le zombie a gagné");
+            System.out.println("The enemy wins!");
         }
     }
 
