@@ -31,6 +31,7 @@ class EnemiProjectile implements Projectile{
         return damage;
     }
 
+    // to make the projectile move
     @Override
     public void updateProjPosition() {
         // for upward movement

@@ -13,6 +13,8 @@ import javax.swing.Action;
 
 public class Enemi extends Pion implements Projectile {
 
+
+
     private int gain = 50;
     private int dommage;
     private double projectileSpeed = 6.0;
@@ -63,6 +65,10 @@ public class Enemi extends Pion implements Projectile {
     public void draw(Graphics g) {
         g.setColor(Color.WHITE);
         g.drawOval(x, y, size, size);
+
+        // Draw PV inside the oval
+        g.setColor(Color.WHITE);
+        g.drawString(Integer.toString(pv), x + 10, y + 20);
 
         // Draw projectiles
         for (Projectile projectile : projectilesEnemis) {

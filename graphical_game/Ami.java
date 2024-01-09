@@ -11,7 +11,8 @@ import java.util.TimerTask;
 
 public class Ami extends Pion implements Projectile {
 
-    private int cout;
+    public static int argent = 100;
+    public static int cout = 20;
     private int dommage;
     private double projectileSpeed;
     private int projectileSize = 10; // Set your desired projectile size
@@ -55,6 +56,10 @@ public class Ami extends Pion implements Projectile {
     public void draw(Graphics g) {
         g.setColor(Color.RED); // Change color for stationary ovals
         g.drawOval(x, y, size, size);
+
+        // Draw the PV of the ami
+        g.setColor(Color.RED);
+        g.drawString(Integer.toString(pv), x + 10, y + 20);
 
         // Draw projectiles
         for (Projectile projectile : projectilesAmis) {

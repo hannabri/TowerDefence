@@ -5,6 +5,7 @@ import javax.swing.*;
 import org.w3c.dom.ranges.Range;
 
 import TowerDefence.scenes.GameOver;
+import TowerDefence.scenes.Settings;
 import TowerDefence.scenes.Win;
 
 import java.awt.*;
@@ -16,6 +17,8 @@ import java.awt.geom.Line2D;
 import java.time.temporal.ValueRange;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class GameScreen extends JFrame {
 
@@ -31,12 +34,22 @@ public class GameScreen extends JFrame {
     public List<EnemiProjectile> projectilesEnemis;
     public List<AmiProjectile> projectilesAmis;
 
+    // Create a label to display the money
+    public JLabel moneyLabel;
+
 
     public GameScreen() {
         setTitle("Tower Defence");
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        moneyLabel = new JLabel("Money: " + Ami.argent);
+
+        // Add the label to the frame
+        add(moneyLabel, BorderLayout.NORTH);
+
+
 
         enemis = new ArrayList<>();
         amis = new ArrayList<>();
@@ -45,6 +58,8 @@ public class GameScreen extends JFrame {
 
         startNextWave();
 
+        // Create a panel to add the money and the level of the game
+
 
         timer = new Timer(100, new ActionListener() {
 
@@ -52,13 +67,13 @@ public class GameScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 // Update the position of each oval
-                
+
                 updatePositionEnemi();
 
                 updatePositionEnemiProj();
 
                 updatePositionAmiProj();
-                
+
                 // updateEnemis();
 
                 // updateAmi();
@@ -71,19 +86,44 @@ public class GameScreen extends JFrame {
 
         timer.start();
 
-        // Add a mouse click listener to the frame
+
+
+
+        // Add a mouse click listener to the frame for adding a new ami at the click position
+        // it suppose to add multiple projectile but it doesn't work
+        // If you pull a new ami to the frame, then your money is argent - cout
+
         addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                Ami ami = new Ami (e.getX(), e.getY());
-                // Add a new stationary oval at the click position
+            // Inside your mouseClicked method
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            // Check if you have enough money to create an Ami
+            if (Ami.argent >= Ami.cout) {
+                Ami ami = new Ami(e.getX(), e.getY());
+                // Deduct the cost from your money
+                Ami.argent -= Ami.cout;
+                // Add the new Ami to the list
                 amis.add(ami);
+                // Add a new corresponding projectile
                 projectilesAmis.add(new AmiProjectile(ami.getPositionX(), ami.getPositionY()));
                 repaint();
+            } else {
+                // Display a message in the JPanel
+                JLabel notEnoughMoneyLabel = new JLabel("Not enough money to create an Ami!");
+                notEnoughMoneyLabel.setForeground(Color.RED);
             }
+        }
+
         });
     }
 
+    public void updateArgent(){
+        // method to update the money Label
+        moneyLabel.setText("Money: " + Ami.argent);
+    }
+
+    // Update the position of each enemi and check if it is out of the frame
+    // If it is out of the frame, stop the timer and show the game over message
     public void updatePositionEnemi() {
         for (Pion oval : enemis) {
             oval.updatePosition();
@@ -97,6 +137,7 @@ public class GameScreen extends JFrame {
         }
     }
 
+    // Update the poition of each projectile and check if it collide with an ami
     public void updatePositionEnemiProj() {
 
         for (Projectile projectile : projectilesEnemis){
@@ -112,6 +153,8 @@ public class GameScreen extends JFrame {
         }
     }
 
+    // Update the poition of each projectile and check if it collide with an enemi
+
     public void updatePositionAmiProj() {
 
         for (Projectile projectile : projectilesAmis) {
@@ -126,18 +169,18 @@ public class GameScreen extends JFrame {
         }
     }
 
+    // Check if a projectile collide with an ami
     public boolean collideWithAmi(Projectile p, Ami a) {
         final ValueRange rangeX = ValueRange.of((int)p.getPosition()[0] - 25, (int)p.getPosition()[0] + 75);
         final ValueRange rangeY = ValueRange.of(a.getPositionX() - 4, a.getPositionX() + 4);
 
         if (rangeY.isValidIntValue((int) p.getPosition()[1]) && rangeX.isValidIntValue(a.getPositionX())) {
-            System.out.println("Position proj: " + ((int) p.getPosition()[0] + 4) + ", " + ((int) p.getPosition()[1] + 4) + "Position Ami: " + a.getPositionX() + " , " + a.getPositionY());
             return true;
         }
-        System.out.println("Position proj: " + p.getPosition()[0] + ", " + p.getPosition()[1] + " , " + "Position Ami: " + a.getPositionX() + " , " + a.getPositionY());
         return false;
     }
 
+    // Check if a projectile collide with an enemi
     public boolean collideWithEnemi (Projectile p, Enemi e) {
         final ValueRange rangeX = ValueRange.of((int)p.getPosition()[0] - 25, (int)p.getPosition()[0] + 75);
         final ValueRange rangeY = ValueRange.of(e.getPositionX() - 4, e.getPositionX() + 4);
@@ -148,14 +191,17 @@ public class GameScreen extends JFrame {
         return false;
     }
 
+    // If a projectile collide with an ami, the ami lose pv
     public void enemiProjCollideAmi(Projectile p, Ami a) {
         a.setPdv(a.pv - p.getDamage());
     }
 
+    // If a projectile collide with an enemi, the enemi lose pv
     public void AmiProjCollideEnemi(Projectile p, Enemi e) {
         e.setPdv(e.pv - p.getDamage());
     }
 
+    // Remove the dead enemis from the list
     public List<Enemi> updateEnemis() {
         for (Pion oval : enemis) {
             if (oval.estMort()) {
@@ -165,17 +211,20 @@ public class GameScreen extends JFrame {
         return enemis;
     }
 
+    // Remove the dead amis from the list
     public List<Ami> updateAmi() {
         for (Pion oval : amis) {
             if (oval.estMort()) {
                 amis.remove(oval);
+                // remove the oval from the frame when it is dead (not working)
             }
         }
         return amis;
     }
 
+
     public boolean hasNextWave(int i) {
-        // verify if there is another enemy wave
+        // Verify if there is another enemy wave
 
         if (i >= vague) {
             return false;
@@ -185,6 +234,7 @@ public class GameScreen extends JFrame {
 
     }
 
+    // Start the next wave of enemis
     public void startNextWave() {
         int w = 1;
         if (enemis.isEmpty()) {
@@ -204,6 +254,7 @@ public class GameScreen extends JFrame {
 
         }
     }
+
 
     @Override
     public void paint(Graphics g) {
