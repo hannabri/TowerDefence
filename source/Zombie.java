@@ -34,7 +34,7 @@ public class Zombie {
     }
 
     public String toString() {
-        return "Le " + this.getClass() + " se trouve à la position " + getX() + ", " + getY() + " et il a encore " + getPdv() + " points de vie.";
+        return "The " + this.getClass() + " is at " + getX() + ", " + getY() + " and it still has " + getPdv() + " health points.";
     }
 
     public boolean estMort() {
@@ -99,7 +99,7 @@ public class Zombie {
     // le zombie attque une plante
     public void attaqueZombie (Plante p) {
         if (! p.estMort() && this.getY() == p.getY() && Math.abs(this.getX() - p.getX()) <= getReach()) {
-            System.out.println("ATTAQUE ZOMBIE!");
+            System.out.println("ENEMY ATTACK!");
             p.recoitAttaque(this.getDommage());
         }
     }
@@ -110,7 +110,7 @@ public class Zombie {
 
         if (this.estMort()) {
             GrilleJeu.argent += getGain();
-            System.out.println("La plante a gagné");
+            System.out.println("The flower wins!");
         }
     }
 
@@ -119,30 +119,4 @@ public class Zombie {
 
     }
 
-    // public void avancer(GrilleJeu gameSet, Game game) {
-    //     long lastStep = System.currentTimeMillis();
-    //         boolean goOn = true;
-
-    //         while (goOn) {
-
-
-    //             if (System.currentTimeMillis() - lastStep >= 5000) {
-
-    //                 game.attaque_avance(gameSet.getZombies(), gameSet.getPlantes());
-
-    //                 gameSet.afficher();
-    //                 System.out.println("");
-
-    //                 goOn = game.checkGameEnd(gameSet.getZombies());
-
-    //                 lastStep = System.currentTimeMillis();
-    //             }
-    //         }
-        //     gameSet.afficher();
-
-
-
-
-
-        // }
 }

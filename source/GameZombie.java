@@ -25,15 +25,27 @@ public class GameZombie extends Thread {
 
     public void run(){
 
-        // boolean goOn = game.checkGameEnd(gameSet.getZombies());
-        while (true) {
+        boolean goOn = game.checkGameEnd(gameSet.getZombies());
+        int v = game.getVagues();
+        while (goOn) {
             avancer();
             try {
                 Thread.sleep(sleep);
             } catch (Exception e) {
                 System.out.println("FAIL");
             }
-            // goOn = game.checkGameEnd(gameSet.getZombies());
+
+            if (! game.zombieWin(gameSet.getZombies())) {
+                goOn = false;
+            } else{
+                if (! game.checkGameEnd(gameSet.getZombies())){
+                    v --;
+                    game.createZombieVague(gameSet);
+                    if (v == 0) {
+                        goOn = false;
+                    }
+                }
+            }
         }
     }
 
