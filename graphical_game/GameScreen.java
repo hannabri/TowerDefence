@@ -28,7 +28,8 @@ public class GameScreen extends JFrame {
     public Timer timer;
     public List<Enemi> enemis;
     public List<Ami> amis;
-    public List<Projectile> projectiles;
+    public List<EnemiProjectile> projectilesEnemis;
+    public List<AmiProjectile> projectilesAmis;
 
 
     public GameScreen() {
@@ -39,7 +40,8 @@ public class GameScreen extends JFrame {
 
         enemis = new ArrayList<>();
         amis = new ArrayList<>();
-        projectiles = new ArrayList<>();
+        projectilesEnemis = new ArrayList<>();
+        projectilesAmis = new ArrayList<>();
 
         startNextWave();
 
@@ -50,13 +52,18 @@ public class GameScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 // Update the position of each oval
-                updateEnemis();
-
-                startNextWave();
-
+                
                 updatePositionEnemi();
 
                 updatePositionEnemiProj();
+
+                updatePositionAmiProj();
+                
+                // updateEnemis();
+
+                // updateAmi();
+
+                startNextWave();
 
                 repaint();
             }
@@ -71,7 +78,7 @@ public class GameScreen extends JFrame {
                 Ami ami = new Ami (e.getX(), e.getY());
                 // Add a new stationary oval at the click position
                 amis.add(ami);
-                projectiles.add(new AmiProjectile(ami.getPositionX(), ami.getPositionY()));
+                projectilesAmis.add(new AmiProjectile(ami.getPositionX(), ami.getPositionY()));
                 repaint();
             }
         });
@@ -85,13 +92,14 @@ public class GameScreen extends JFrame {
                 System.out.println("Game Over");
                 GameOver gameOver = new GameOver();
                 gameOver.setVisible(true);
+                break;
             }
         }
     }
 
     public void updatePositionEnemiProj() {
 
-        for (Projectile projectile : projectiles){
+        for (Projectile projectile : projectilesEnemis){
             projectile.updateProjPosition();
 
             for (Ami ami : amis) {
@@ -104,11 +112,37 @@ public class GameScreen extends JFrame {
         }
     }
 
-    public boolean collideWithAmi(Projectile p, Pion a) {
-        final ValueRange rangeX = ValueRange.of((int)p.getPosition()[0] - 20, (int)p.getPosition()[0] + 80);
-        final ValueRange rangeY = ValueRange.of(a.getPositionX() - 2, a.getPositionX() + 2);
+    public void updatePositionAmiProj() {
+
+        for (Projectile projectile : projectilesAmis) {
+            projectile.updateProjPosition();
+
+            for (Enemi enemi : enemis) {
+                if (collideWithEnemi(projectile, enemi)) {
+                    AmiProjCollideEnemi(projectile, enemi);
+                    System.out.println(enemi + " a perdu " + projectile.getDamage() + " points de vie. Il lui reste " + enemi.pv + " points de vie.");
+                }
+            }
+        }
+    }
+
+    public boolean collideWithAmi(Projectile p, Ami a) {
+        final ValueRange rangeX = ValueRange.of((int)p.getPosition()[0] - 25, (int)p.getPosition()[0] + 75);
+        final ValueRange rangeY = ValueRange.of(a.getPositionX() - 4, a.getPositionX() + 4);
 
         if (rangeY.isValidIntValue((int) p.getPosition()[1]) && rangeX.isValidIntValue(a.getPositionX())) {
+            System.out.println("Position proj: " + ((int) p.getPosition()[0] + 4) + ", " + ((int) p.getPosition()[1] + 4) + "Position Ami: " + a.getPositionX() + " , " + a.getPositionY());
+            return true;
+        }
+        System.out.println("Position proj: " + p.getPosition()[0] + ", " + p.getPosition()[1] + " , " + "Position Ami: " + a.getPositionX() + " , " + a.getPositionY());
+        return false;
+    }
+
+    public boolean collideWithEnemi (Projectile p, Enemi e) {
+        final ValueRange rangeX = ValueRange.of((int)p.getPosition()[0] - 25, (int)p.getPosition()[0] + 75);
+        final ValueRange rangeY = ValueRange.of(e.getPositionX() - 4, e.getPositionX() + 4);
+
+        if (rangeY.isValidIntValue((int) p.getPosition()[1]) && rangeX.isValidIntValue(e.getPositionX())) {
             return true;
         }
         return false;
@@ -118,6 +152,10 @@ public class GameScreen extends JFrame {
         a.setPdv(a.pv - p.getDamage());
     }
 
+    public void AmiProjCollideEnemi(Projectile p, Enemi e) {
+        e.setPdv(e.pv - p.getDamage());
+    }
+
     public List<Enemi> updateEnemis() {
         for (Pion oval : enemis) {
             if (oval.estMort()) {
@@ -125,6 +163,15 @@ public class GameScreen extends JFrame {
             }
         }
         return enemis;
+    }
+
+    public List<Ami> updateAmi() {
+        for (Pion oval : amis) {
+            if (oval.estMort()) {
+                amis.remove(oval);
+            }
+        }
+        return amis;
     }
 
     public boolean hasNextWave(int i) {
@@ -146,7 +193,7 @@ public class GameScreen extends JFrame {
                 for (int i = 0; i < NUM_ENEMIS; i++) {
                     Enemi enemi = new Enemi(0);
                     enemis.add(enemi);
-                    projectiles.add(new EnemiProjectile(enemi.getPositionX(), enemi.getPositionY()));  // Set y to the top of the frame
+                    projectilesEnemis.add(new EnemiProjectile(enemi.getPositionX(), enemi.getPositionY()));  // Set y to the top of the frame
                 }
             } else {
                 timer.stop();
@@ -182,7 +229,11 @@ public class GameScreen extends JFrame {
         for (Ami oval : amis) {
             oval.draw(g);
         }
-        for (Projectile p : projectiles) {
+        for (Projectile p : projectilesEnemis) {
+            p.drawProj(g);
+        }
+
+        for (Projectile p : projectilesAmis) {
             p.drawProj(g);
         }
 
