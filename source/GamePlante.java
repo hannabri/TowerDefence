@@ -48,7 +48,15 @@ public class GamePlante{
 
                 if (p != null) {
                     gameSet.getPlantes().add(p);
-                    GrilleJeu.grille[pos_x][pos_y] = 1;
+                    if (p.getClass()== PlanteCarnivore.class) {
+                        GrilleJeu.grille[pos_x][pos_y] = "C";
+                    } else {
+                        if (p.getClass() == Rose.class) {
+                            GrilleJeu.grille[pos_x][pos_y] = "R";
+                        } else {
+                            GrilleJeu.grille[pos_x][pos_y] = "P";
+                        }
+                    }
                 }
 
                 gameSet.afficher();

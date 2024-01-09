@@ -19,7 +19,6 @@ public class Game {
 
     public Game(long speed) {
         this.speed = speed;
-        setVagues(3);
     }
 
     public void setVagues(int v) {
@@ -61,6 +60,11 @@ public class Game {
             return false;
         }
 
+        return true;
+    }
+
+    public boolean zombieWin(ArrayList<Zombie> zombies) {
+
         for (Zombie z: zombies) {
             if (z.getX() <= 0) {
                     System.out.println("GAME OVER!");
@@ -90,7 +94,7 @@ public class Game {
         }
 
         for (Zombie zm : zombiesMorts) {
-            GrilleJeu.grille[zm.getX() + zm.getVitesse()][zm.getY()] = 0;
+            GrilleJeu.grille[zm.getX() + zm.getVitesse()][zm.getY()] = ".";
             zombies.remove(zm);
         }
     }
@@ -115,6 +119,18 @@ public class Game {
     }
     }
 
+    public void processGameMode(int m) {
+        switch (m) {
+            case 1:
+                setVagues(3);
+                break;
+        
+            case 2:
+                setVagues(10000);
+                break;
+        }
+    }
+
     // gère le jeu dans la console
     public static void console_game(String[] args) throws Exception {
         
@@ -129,35 +145,35 @@ public class Game {
             
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Il vous reste " + gameSet.getArgent() + " d'argent.");
-        System.out.println("Vous pouvez placer des plantes à n'importe quel moment. Préciser d'abord le type et ensuite la position x et y.");
-        System.out.println("1 - La plante basique coûte 10 et atteint un zombie à 1 avec un dommage de 185");
-        System.out.println("2 - La plante carnivore coûte 25 et atteint un zombie à 5 avec un dommage de 50");
-        System.out.println("3 - La rose coûte 50 et atteint un zombie à 3 avec un dommage de 75");
-        System.out.println("Voulez-vous créer une plante basique - 1, une plante carnivore - 2 ou une rose - 3 ?");
+        System.out.println("Do you want to play normal mode - 1 or marathon mode - 2?");
+        int playMode = Integer.valueOf(reader.readLine());
+        game.processGameMode(playMode);
+
+        System.out.println("You still have " + gameSet.getArgent() + " money.");
+        System.out.println("You can place a flower at any moment of the game. Enter first the flower type and then the x and y position.");
+        System.out.println("1 - The basic flower costs 10 and can reach the enemy at 1 with a 185 damage.");
+        System.out.println("2 - The carnivore flower costs 25 and can reach the enemy at 5 with a 50 damage.");
+        System.out.println("3 - The rose costs 50 and can reach the enemy at 3 with a 75 damage.");
+        System.out.println("Do you want to place a basic flower - 1, a carnivore flower - 2 or a rose - 3 ?");
+        System.out.println("Press any key to start the game.");
+        reader.readLine();
         
         game.createZombieVague(gameSet);
         zombieThread.start();
             
         
             try {
-                int v = 0;
 
-                while(game.checkGameEnd(gameSet.getZombies())) {
-
-                    if (gameSet.getZombies().size() < 2 && v < game.getVagues()) {
-                        game.createZombieVague(gameSet);
-                        v ++;
-                    }
+                while(game.checkGameEnd(gameSet.getZombies()) || game.zombieWin(gameSet.getZombies())) {
 
                     int typePlante = Integer.valueOf(reader.readLine());
                     int pos_x = Integer.valueOf(reader.readLine());
                     int pos_y = Integer.valueOf(reader.readLine());
 
-                    if (pos_x > 9 || pos_y > 4 || GrilleJeu.grille[pos_x][pos_y] == 1) {
+                    if (pos_x > 9 || pos_y > 4 || GrilleJeu.grille[pos_x][pos_y] == "P") {
                     System.out.println("La position n'est pas disponible. Entrez une nouvelle position.");
-                    pos_x = reader.read();
                     pos_y = reader.read();
+                    pos_x = reader.read();
                     }
 
                     plante.createPlante(typePlante, pos_x, pos_y);
