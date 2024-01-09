@@ -45,6 +45,14 @@ public class GameScreen extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        moneyLabel = new JLabel("Money: " + Ami.argent);
+        moneyLabel.setFont(new Font("Serif", Font.PLAIN, 20)); // Set your desired font
+        moneyLabel.setForeground(Color.RED);
+
+        // Add the label to the frame's content pane
+        getContentPane().add(moneyLabel, BorderLayout.NORTH);
+
+
 
         enemis = new ArrayList<>();
         amis = new ArrayList<>();
@@ -112,6 +120,7 @@ public class GameScreen extends JFrame {
     });
 
     }
+
 
 
     public void updateArgent(){
