@@ -55,7 +55,6 @@ public class Game {
     public boolean checkGameEnd(ArrayList<Zombie> zombies) {
 
         if (zombies.isEmpty()) {
-            System.out.println("The flowers win!");
             return false;
         }
 
@@ -66,7 +65,6 @@ public class Game {
 
         for (Zombie z: zombies) {
             if (z.getX() <= 0) {
-                    System.out.println("GAME OVER!");
                     return false;
                 }
             }
@@ -103,7 +101,7 @@ public class Game {
         
         Random rnd = new Random();
         
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
             int typeZombie = rnd.nextInt(2);
 
             switch (typeZombie) {
@@ -121,7 +119,7 @@ public class Game {
     public void processGameMode(int m) {
         switch (m) {
             case 1:
-                setVagues(3);
+                setVagues(1);
                 break;
         
             case 2:
@@ -163,7 +161,8 @@ public class Game {
         
             try {
 
-                while(game.checkGameEnd(gameSet.getZombies()) || game.enemyWin(gameSet.getZombies())) {
+                while(game.checkGameEnd(gameSet.getZombies()) && game.enemyWin(gameSet.getZombies())) {
+                    System.out.println("Number of zombis: " + gameSet.getZombies().size());
 
                     int typePlante = Integer.valueOf(reader.readLine());
                     int pos_x = Integer.valueOf(reader.readLine());
@@ -176,7 +175,14 @@ public class Game {
                     }
 
                     plante.createPlante(typePlante, pos_x, pos_y);
+                    System.out.println("End of while");
                     
+            }
+
+            if (! game.enemyWin(gameSet.getZombies())) {
+                System.out.println("GAME OVER!");
+            } else {
+                System.out.println("The flowers win!");
             }
 
             } catch (IOException e) {
