@@ -45,12 +45,6 @@ public class GameScreen extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        moneyLabel = new JLabel("Money: " + Ami.argent);
-
-        // Add the label to the frame
-        add(moneyLabel, BorderLayout.NORTH);
-
-
 
         enemis = new ArrayList<>();
         amis = new ArrayList<>();
@@ -103,20 +97,22 @@ public class GameScreen extends JFrame {
                 Ami ami = new Ami(e.getX(), e.getY());
                 // Deduct the cost from your money
                 Ami.argent -= Ami.cout;
+                // Update the money label
+                updateArgent();
                 // Add the new Ami to the list
                 amis.add(ami);
                 // Add a new corresponding projectile
                 projectilesAmis.add(new AmiProjectile(ami.getPositionX(), ami.getPositionY()));
                 repaint();
-            } else {
-                // Display a message in the JPanel
-                JLabel notEnoughMoneyLabel = new JLabel("Not enough money to create an Ami!");
-                notEnoughMoneyLabel.setForeground(Color.RED);
+            } else if (Ami.argent < Ami.cout) {
+                JOptionPane.showMessageDialog(GameScreen.this, "Not enough money to create an Ami!", "Insufficient Funds", JOptionPane.WARNING_MESSAGE);
             }
-        }
 
-        });
+        }
+    });
+
     }
+
 
     public void updateArgent(){
         // method to update the money Label
