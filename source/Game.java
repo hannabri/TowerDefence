@@ -62,7 +62,7 @@ public class Game {
         return true;
     }
 
-    public boolean zombieWin(ArrayList<Zombie> zombies) {
+    public boolean enemyWin(ArrayList<Zombie> zombies) {
 
         for (Zombie z: zombies) {
             if (z.getX() <= 0) {
@@ -163,7 +163,7 @@ public class Game {
         
             try {
 
-                while(game.checkGameEnd(gameSet.getZombies()) || game.zombieWin(gameSet.getZombies())) {
+                while(game.checkGameEnd(gameSet.getZombies()) || game.enemyWin(gameSet.getZombies())) {
 
                     int typePlante = Integer.valueOf(reader.readLine());
                     int pos_x = Integer.valueOf(reader.readLine());

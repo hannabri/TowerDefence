@@ -35,7 +35,7 @@ public class GameZombie extends Thread {
                 System.out.println("FAIL");
             }
 
-            if (! game.zombieWin(gameSet.getZombies())) {
+            if (! game.enemyWin(gameSet.getZombies())) {
                 goOn = false;
             } else{
                 if (! game.checkGameEnd(gameSet.getZombies())){
