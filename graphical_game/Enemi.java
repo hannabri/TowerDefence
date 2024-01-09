@@ -82,12 +82,13 @@ public class Enemi extends Pion implements Projectile {
     }
 
     public boolean estMort() {
-        if (this.pv <= 0) {
+        if (this.pv <= 0){
             projectileTimer.cancel();
             return true;
         }
         return false;
     }
+
 
     @Override
     public void setPdv(int vie) {

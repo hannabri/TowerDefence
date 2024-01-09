@@ -1,6 +1,7 @@
 package TowerDefence.graphical_game;
 
 import javax.swing.*;
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 import org.w3c.dom.ranges.Range;
 
@@ -74,9 +75,9 @@ public class GameScreen extends JFrame {
 
                 updatePositionAmiProj();
 
-                // updateEnemis();
+                updateEnemis();
 
-                // updateAmi();
+                updateAmi();
 
                 startNextWave();
 
@@ -201,25 +202,35 @@ public class GameScreen extends JFrame {
         e.setPdv(e.pv - p.getDamage());
     }
 
-    // Remove the dead enemis from the list
-    public List<Enemi> updateEnemis() {
-        for (Pion oval : enemis) {
-            if (oval.estMort()) {
-                enemis.remove(oval);
+    // Remove the dead enemies from the list and from the frame
+    public void updateEnemis() {
+        List<Enemi> enemiesToRemove = new ArrayList<>();
+
+        for (Enemi enemi : enemis) {
+            if (enemi.estMort()) {
+                enemiesToRemove.add(enemi);
             }
         }
-        return enemis;
+
+        enemis.removeAll(enemiesToRemove);
+        enemiesToRemove.clear();
     }
 
+
+
     // Remove the dead amis from the list
-    public List<Ami> updateAmi() {
-        for (Pion oval : amis) {
-            if (oval.estMort()) {
-                amis.remove(oval);
-                // remove the oval from the frame when it is dead (not working)
+    public void updateAmi() {
+
+        List<Ami> amisToRemove = new ArrayList<>();
+
+        for (Ami ami : amis) {
+            if (ami.estMort()) {
+                amisToRemove.add(ami);
             }
         }
-        return amis;
+
+        amis.removeAll(amisToRemove);
+        amisToRemove.clear();
     }
 
 

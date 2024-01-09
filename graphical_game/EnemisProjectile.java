@@ -8,7 +8,7 @@ class EnemiProjectile implements Projectile{
     public int x;
     public int y;
     public double speed = 8.0;
-    public int damage = 20;
+    public int damage = 200;
 
     EnemiProjectile(int x, int y) {
         this.x = x;
