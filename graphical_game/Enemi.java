@@ -13,7 +13,7 @@ import javax.swing.Action;
 
 public class Enemi extends Pion implements Projectile {
 
-    private int gain;
+    private int gain = 50;
     private int dommage;
     private double projectileSpeed = 6.0;
     private int projectileSize = 10;

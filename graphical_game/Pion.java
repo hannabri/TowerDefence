@@ -11,7 +11,7 @@ public abstract class Pion {
     public int x;
     public int y;
     public int size;
-    public double speed; 
+    public double speed;
 
     public int pv; // point de vie
 
@@ -67,5 +67,9 @@ public abstract class Pion {
             Random random = new Random();
             int randomNumber =  random.nextInt(maxValue);
             return randomNumber * 100 + 25;
+        }
+
+        public void stopMovement() {
+            speed = 0;
         }
     }

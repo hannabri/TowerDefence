@@ -7,14 +7,14 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+
 import javax.imageio.ImageIO;
 
 public class GameOver extends JFrame {
     private static final int largeur = 300;
     private static final int hauteur = 200;
     private JFrame menu;
-
-    // Declare BufferedImage at the class level
     private BufferedImage image;
 
     public GameOver() {
@@ -24,7 +24,7 @@ public class GameOver extends JFrame {
         setLocationRelativeTo(null);
 
         // Create an ImagePanel to display an image
-        ImagePanel imagePanel = new ImagePanel();
+        ImagePanel imagePanel = new ImagePanel(image);
         add(imagePanel, BorderLayout.CENTER);
 
         // Create a button to return to the menu screen
@@ -46,32 +46,38 @@ public class GameOver extends JFrame {
 
     // Inner class for ImagePanel
     private class ImagePanel extends JPanel {
-        public ImagePanel() {
+        private BufferedImage image;
+
+        public ImagePanel(BufferedImage image) {
+            this.image = image;
             importImg();
-            loadSprite();
         }
 
         private void importImg() {
-            // Use absolute path to the image file
-            try {
-                image = ImageIO.read(new File("C:/Users/marie/OneDrive/Documents/JeuJava/TowerDefence/res/gameover.jpg"));
+            try (InputStream is = getClass().getResourceAsStream("/gameover.jpg")) {
+                if (is != null) {
+                    image = ImageIO.read(is);
+                } else {
+                    System.err.println("Image not found: /gameover.png");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        private void loadSprite() {
-            // Add your logic to load the sprite if needed
-        }
 
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
-
             // Draw the image at the top-left corner
             if (image != null) {
                 g.drawImage(image, 20, 20, null);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        GameOver gameOver = new GameOver();
+        gameOver.setVisible(true);
     }
 }

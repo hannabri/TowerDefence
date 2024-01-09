@@ -1,18 +1,23 @@
 package TowerDefence.scenes;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
-public class Win extends JFrame{
+public class Win extends JFrame {
 
     private static final int largeur = 300;
     private static final int hauteur = 200;
     private JFrame menu;
+    private BufferedImage image;
 
     public Win() {
-
-
         // Create a panel
         JPanel panel = new JPanel();
 
@@ -23,6 +28,10 @@ public class Win extends JFrame{
         setSize(largeur, hauteur);
         setTitle("YOU WON!");
         setLocationRelativeTo(null);
+
+        // Create an ImagePanel to display an image
+        ImagePanel imagePanel = new ImagePanel();
+        add(imagePanel, BorderLayout.CENTER);
 
         // Create a button to return to the menu screen
         JButton returnButton = new JButton("Menu");
@@ -41,6 +50,42 @@ public class Win extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         getContentPane().add(panel);
-    }  
+    }
 
+    // Inner class for ImagePanel
+    private class ImagePanel extends JPanel {
+        public ImagePanel() {
+            importImg();
+            loadSprite();
+        }
+
+        private void loadSprite() {
+        }
+
+        private void importImg() {
+            try (InputStream is = getClass().getResourceAsStream("/YouWin.png")) {
+                if (is != null) {
+                    image = ImageIO.read(is);
+                } else {
+                    System.err.println("Image not found: /YouWin.png");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+
+            // Draw the image at the top-left corner
+            if (image != null) {
+                g.drawImage(image, 0, 0, null);
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Win win = new Win();
+        win.setVisible(true);
+    }
 }
