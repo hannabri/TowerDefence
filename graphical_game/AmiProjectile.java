@@ -34,7 +34,7 @@ class AmiProjectile implements Projectile{
     @Override
     public void updateProjPosition() {
         // for upward movement
-       y -= 5;
+       y -= speed;
     }
 
     @Override

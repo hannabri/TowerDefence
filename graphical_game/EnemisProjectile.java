@@ -35,9 +35,6 @@ class EnemiProjectile implements Projectile{
     public void updateProjPosition() {
         // for upward movement
        y += speed;
-    //    if my porjectile have reach an ami pion, i have to remove the projectile from the list and remove pv to the ami pion
-
-
 
     }
 
