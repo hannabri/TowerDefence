@@ -73,9 +73,4 @@ public class GameOver extends JFrame {
             }
         }
     }
-
-    public static void main(String[] args) {
-        GameOver gameOver = new GameOver();
-        gameOver.setVisible(true);
-    }
 }

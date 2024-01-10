@@ -9,7 +9,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class Ami extends Pion implements Projectile {
+public class Ami extends Pion {
 
     public static int argent = 100;
     public static int cout = 20;
@@ -97,38 +97,10 @@ public class Ami extends Pion implements Projectile {
         this.projectileSpeed = speed;
     }
 
-    @Override
-    public double[] getPosition() {
-        return new double[]{x, y};
-    }
 
     @Override
     public void setDamage(int damage) {
         this.dommage = damage;
-    }
-
-    @Override
-    public void setPosition(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    @Override
-    public int getDamage() {
-        return dommage;
-    }
-
-    @Override
-    public void updateProjPosition() {
-        // for upward movement of projectile
-        y -= projectileSpeed;
-    }
-
-    @Override
-    public void drawProj(Graphics g) {
-        // Example: Draw a blue rectangle for Ami's projectile
-        g.setColor(Color.BLUE);
-        g.fillRect((int) x, (int) y, projectileSize, projectileSize);
     }
 
     @Override
