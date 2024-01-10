@@ -3,17 +3,17 @@ package TowerDefence.source;
 
 public class Plante {
 
-    // endroit où la plante est plantée
+    // position
     private int location_x;
     private int location_y;
 
-    // Points de vie de la plante
+    // health points
     private int pdv;
 
-    // Le dommage qu'elle cause
+    // dammage
     private int dommage;
 
-    // Le coût de la plante
+    // cost and reach
     private int cout;
     private int reach;
 
@@ -26,6 +26,7 @@ public class Plante {
         setDommage(20);
         setReach(1);
 
+        // checks if the user has enough money to buy a flower
         if (GrilleJeu.argent < getCout()) {
             setPdv(0);
             System.out.println("You do not have enough money to create another flower.");
@@ -86,7 +87,7 @@ public class Plante {
         return reach;
     }
 
-    // La plante attque un zombie
+    // the flower attacks an enemy
     public void attaquePlante (Zombie z) {
         int test = Math.abs(this.getX() - z.getX());
         if (! z.estMort() && test <= getReach()){
@@ -95,7 +96,7 @@ public class Plante {
         }
     }
 
-    // La plante est attaquée par un zombie
+    // reduce health points when an enemy attacks the flower
     public void recoitAttaque (int d) {
         this.pdv =  this.pdv - d;
 

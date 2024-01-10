@@ -37,9 +37,8 @@ public class Game {
         return speed; 
     }
 
-    // méthode pour qu'une plante attaque un zombie et vice versa
-    // elle vérifie si la plante / le zombie est mort
-    // les objets morts sont stockés dans une liste séparée pour pouvoir les enlever plus tard
+    // this method let a enemy attack a flower and vice versa
+    // it verifies also if the enemy / flower is dead = has no more health points
     private void attaquer (ArrayList<Plante> plantes, Zombie z) {
 
         for (Plante p : plantes) {
@@ -49,6 +48,9 @@ public class Game {
                 z.attaqueZombie(p);
 
             }
+
+            // the dead objects are put in a list so that they are removed from the original list
+            // the objects are removed in attaque_avancer
             if (p.estMort()) {
                 this.plantesMortes.add(p);
             }
@@ -58,7 +60,7 @@ public class Game {
         }
     }
 
-    // retourne true si le jeu n'est pas encore fini
+    // returns true if the game is not yet finished
     public boolean checkGameEnd(ArrayList<Zombie> zombies) {
 
         if (zombies.isEmpty()) {
@@ -68,6 +70,7 @@ public class Game {
         return true;
     }
 
+    //returns true if the enemies are not yet at the end of the game screen
     public boolean enemyWin(ArrayList<Zombie> zombies) {
 
         for (Zombie z: zombies) {
@@ -80,8 +83,8 @@ public class Game {
 
     }
 
-    // fait avancer le zombie, la méthode attaque est exécutée à chaque pas du zombie
-    // cette méthode enlève les zombies et plantes mortes de leur liste
+    // this method lets the enemy move forward. At each step, the method attaque is executed
+    // this method is called by the method avancer of class GameZombie
     public void attaque_avance(ArrayList<Zombie> zombies, ArrayList<Plante> plantes) {
         System.out.println("");
 
@@ -91,6 +94,8 @@ public class Game {
 
             attaquer(plantes, z);
 
+
+            // dead flowers and enemies are removed from the lists
             for (Plante pm : plantesMortes) {
                 plantes.remove(pm);
             }
@@ -102,12 +107,13 @@ public class Game {
         }
     }
 
-    // pour une initialisation aléatoire de la liste des zombies
+    // randomly initialize zombies
     public void createZombieVague(GrilleJeu gameSet) {
         
         Random rnd = new Random();
         
-        for (int i = 0; i < 1; i++) {
+        // creates random number that either creates a superZombie (0) or a Zombie (default)
+        for (int i = 0; i < 3; i++) {
             int typeZombie = rnd.nextInt(2);
 
             switch (typeZombie) {
@@ -122,6 +128,8 @@ public class Game {
     }
     }
 
+    // initiates the number of waves depending on the chose game mode
+    // method processes the user response for the game mode in the console_game method
     public void processGameMode(int m) {
         switch (m) {
             case 1:
@@ -136,6 +144,8 @@ public class Game {
         }
     }
 
+    // sets the speed depending on the chosen level
+    // method processes user response for the level in the console_game method
     public void processLevel(int l) {
         switch(l){
             case 1:
@@ -154,6 +164,8 @@ public class Game {
         
     }
 
+    // restarts or ends the game depending on user input after the end of the game (GAME OVER or YOU WIN)
+    // processes user response given in method console_game
     public void processNextStep(int n) throws Exception {
         switch (n) {
             case 1:
@@ -167,19 +179,20 @@ public class Game {
         }
     }
 
-    // gère le jeu dans la console
+    // manages the console_game() with the user input
     public static void console_game() throws Exception {
         
-        // initialiser la grille du jeu et le jeu lui-même
+        // initiales the game set and creates a game object
         GrilleJeu gameSet = new GrilleJeu();
         Game game = new Game(5000);
 
-        // créer un thread séparé pour faire avancer les zombies (sans attendre la réponse de l'utilisateur)
+        // creates the object to manage the flowers
         GamePlante plante = new GamePlante(game, gameSet);
 
             
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+        // "Menu" questions about mode / level 
         System.out.println("Do you want to play normal mode - 1 or marathon mode - 2?");
         int playMode = Integer.valueOf(reader.readLine());
         game.processGameMode(playMode);
@@ -189,8 +202,10 @@ public class Game {
         int level = Integer.valueOf(reader.readLine());
         game.processLevel(level);
         
+        // creates separate thread for enemies (they move slower or faster depending on chosen level)
         GameZombie zombieThread = new GameZombie(gameSet, game);
 
+        // Explanation how to play the game
         System.out.println("");
         System.out.println("You still have " + gameSet.getArgent() + " money.");
         System.out.println("You can place a flower at any moment of the game. Enter first the flower type and then the x and y position.");
@@ -207,12 +222,16 @@ public class Game {
         
             try {
 
+                // while neither the flowers nor the enemies won the user will be able to place flowers
+                // end of while loop means that the game is over and someone won
                 while(game.checkGameEnd(gameSet.getZombies()) && game.enemyWin(gameSet.getZombies())) {
 
                     int typePlante = Integer.valueOf(reader.readLine());
+
                     if (! zombieThread.isAlive()) {
                         break;
                     }
+
                     int pos_x = Integer.valueOf(reader.readLine());
                     int pos_y = Integer.valueOf(reader.readLine());
 
@@ -226,6 +245,7 @@ public class Game {
                     
             }
 
+            // Ask if the user wants to replay or quit the game
             System.out.println("What do you want to do?");
             System.out.println("1 - play again");
             System.out.println("2 - exit the game");
@@ -237,6 +257,8 @@ public class Game {
                 e.printStackTrace();
 
             } finally {
+
+                // close the input reader and stop the separate zombie thread
                 try {
                     reader.close();
                     zombieThread.interrupt();

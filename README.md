@@ -15,7 +15,7 @@ Une fois le fichier principal exécuté, il est possible de choisir entre le jeu
 
 ### Jeu terminal
 
-Avant de commencer le jeu terminal, il faut choisir entre le mode normal et le mode marathon en tappant soit 1 soit 2. Selon le chiffre entré le jeu se lancera. Chanque cinq secondes la grille du jeu sera affichée avec les emplacement les plantes créées (si déjà créées) et les enemis qui avancent. Il est possibe de placer des plantes en entrant trois chiffres. Le premier chiffre doit se trouver entre 1 et 3. Il indique le type de plante qui va être créé. Les deux autres chiffres correspondent à la position de la plante sur la grille du jeu. Les plantes peuvent être créées à n'importe quel moment pendant le jeu. À chaque création de plante le monant disponible pour créer des nouvelles plantes est affiché. Une fois des plantes créées et des enemis qui avancent, à chaque nouvelle affichage de la grille du jeu, la position, les points de vie et des éventuelles attaques sont communiqués. 
+Avant de commencer le jeu terminal, il faut choisir entre le mode normal et le mode marathon en tappant soit 1 soit 2. Selon le chiffre entré le jeu se lancera. Chanque cinq secondes la grille du jeu sera affichée avec les emplacement les plantes créées (si déjà créées) et les enemis qui avancent. Il est possibe de placer des plantes en entrant trois chiffres. Le premier chiffre doit se trouver entre 1 et 3. Il indique le type de plante qui va être créé. Les deux autres chiffres correspondent à la position de la plante sur la grille du jeu. Les plantes peuvent être créées à n'importe quel moment pendant le jeu. À chaque création de plante le monant disponible pour créer des nouvelles plantes est affiché. Une fois des plantes créées et des enemis qui avancent, à chaque nouvelle affichage de la grille du jeu, des éventuelles attaques sont communiqués. 
 
 ### Jeu graphique
 
@@ -24,4 +24,4 @@ Avant de commencer le jeu terminal, il faut choisir entre le mode normal et le m
 En choisissant le jeu sur l'interface graphique, tout d'abord le menu s'ouvre. Dans le menu il est possible de choisir les différents modes et niveaux pour le jeu dans l'onglet Settings. Avec l'onglet Rules, le jeueur peut lire les règles du jeu avant de commencer à jouer. En cliquant sur Exit, la fenêtre se ferme et le programme s'arrête. 
 
 #### Jeu
-Le premier bouton est intitulé Start Game. Comme le nom l'indique, le jeu est lancé en cliquant sur ce bouton. 
+Le premier bouton du menu est intitulé Start Game. Comme le nom l'indique, un clic sur ce bouton ouvre une nouvelle fenêtre sur laquelle le jeu est lancée. 

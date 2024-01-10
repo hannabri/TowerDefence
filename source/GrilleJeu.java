@@ -4,17 +4,18 @@ import java.util.ArrayList;
 
 public class GrilleJeu {
 
+    // money and game set
     public static int argent = 500;
     public static String[][] grille = new String [10][5];
 
-    // listes avec toutes les plantes et tous les zombies
+    // lists with all the flowers and enemies
     private ArrayList <Zombie> zombies = new ArrayList<>();
     private ArrayList <Plante> plantes = new ArrayList<>();
 
 
     public GrilleJeu() {
 
-        // initialiser la grille du jeu
+        // nitialise the game set
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 5; j++) {
                 grille[i][j] = ".";
@@ -22,7 +23,7 @@ public class GrilleJeu {
         }
     }
 
-    // affiche la grille du jeu dans le terminal
+    // print game set in the terminal
     public void afficher() {
         System.out.print(" ");
         for (int i = 0; i < 10; i++) {
@@ -38,12 +39,11 @@ public class GrilleJeu {
         }
     }
 
-    // encore util?
     public int getArgent() {
         return argent;
     }
 
-    // retourne la liste avec les zombies
+    // returns list with alle the enemies
     public ArrayList<Zombie> getZombies() {
         for (Zombie z : this.zombies) {
             if (z.getX() >= 0) {
@@ -56,12 +56,12 @@ public class GrilleJeu {
         return zombies;
     }
 
-    // retourne la liste avec les plantes
+    // returns list with all the flowers
     public ArrayList<Plante> getPlantes() {
         return plantes;
     }
 
-    // ajoute le zombie à la liste et le retourne
+    // adds enemy to the enemy list
     public Zombie createZombie(Zombie z) {
         zombies.add(z);
         return z;
