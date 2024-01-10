@@ -92,7 +92,6 @@ public class Plante {
         if (! z.estMort() && test <= getReach()){
             System.out.println("FLOWER ATTACK!");
             z.recoitAttaque(this.getDommage());
-            System.out.println(z.toString());
         }
     }
 

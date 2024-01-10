@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class Game {
 
+
     private long speed;
     private int vagues;
 
@@ -28,6 +29,14 @@ public class Game {
         return vagues;
     }
 
+    public void setSpeed(long s) {
+        this.speed = s;
+    }
+
+    public long getSpeed() {
+        return speed; 
+    }
+
     // méthode pour qu'une plante attaque un zombie et vice versa
     // elle vérifie si la plante / le zombie est mort
     // les objets morts sont stockés dans une liste séparée pour pouvoir les enlever plus tard
@@ -39,8 +48,6 @@ public class Game {
                 p.attaquePlante(z);
                 z.attaqueZombie(p);
 
-                System.out.println(p.toString());
-                System.out.println("");
             }
             if (p.estMort()) {
                 this.plantesMortes.add(p);
@@ -55,18 +62,16 @@ public class Game {
     public boolean checkGameEnd(ArrayList<Zombie> zombies) {
 
         if (zombies.isEmpty()) {
-            System.out.println("The flowers win!");
             return false;
         }
 
         return true;
     }
 
-    public boolean zombieWin(ArrayList<Zombie> zombies) {
+    public boolean enemyWin(ArrayList<Zombie> zombies) {
 
         for (Zombie z: zombies) {
             if (z.getX() <= 0) {
-                    System.out.println("GAME OVER!");
                     return false;
                 }
             }
@@ -85,7 +90,6 @@ public class Game {
             z.setX(z.getX() - z.getVitesse());
 
             attaquer(plantes, z);
-            System.out.println(z.toString());
 
             for (Plante pm : plantesMortes) {
                 plantes.remove(pm);
@@ -103,7 +107,7 @@ public class Game {
         
         Random rnd = new Random();
         
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
             int typeZombie = rnd.nextInt(2);
 
             switch (typeZombie) {
@@ -121,24 +125,56 @@ public class Game {
     public void processGameMode(int m) {
         switch (m) {
             case 1:
+                System.out.println("You chose the normal mode");
                 setVagues(3);
                 break;
         
             case 2:
+                System.out.println("You chose the marathon mode");
                 setVagues(10000);
                 break;
         }
     }
 
+    public void processLevel(int l) {
+        switch(l){
+            case 1:
+                System.out.println("You chose the easy level!");
+                this.setSpeed(5000); // 5 seconds
+                break;
+            case 2:
+                System.out.println("You chose the medium level!");
+                this.setSpeed(3000); // 3 seconds
+                break;
+            case 3: 
+                System.out.println("You chose the difficult level!");
+                this.setSpeed(2000); // 2 seconds
+                break;
+        }
+        
+    }
+
+    public void processNextStep(int n) throws Exception {
+        switch (n) {
+            case 1:
+                System.out.println("Let's play again!");
+                Game.console_game();
+                break;
+        
+            case 2:
+                System.out.println("It was nice to play with you!");
+                break;
+        }
+    }
+
     // gère le jeu dans la console
-    public static void console_game(String[] args) throws Exception {
+    public static void console_game() throws Exception {
         
         // initialiser la grille du jeu et le jeu lui-même
         GrilleJeu gameSet = new GrilleJeu();
         Game game = new Game(5000);
 
         // créer un thread séparé pour faire avancer les zombies (sans attendre la réponse de l'utilisateur)
-        GameZombie zombieThread = new GameZombie(gameSet, game, game.speed);
         GamePlante plante = new GamePlante(game, gameSet);
 
             
@@ -148,6 +184,14 @@ public class Game {
         int playMode = Integer.valueOf(reader.readLine());
         game.processGameMode(playMode);
 
+        System.out.println("");
+        System.out.println("Now let's see how good you are! Which level do you want to play? You can chose between level 1, 2 and 3 by entering the corresponding number.");
+        int level = Integer.valueOf(reader.readLine());
+        game.processLevel(level);
+        
+        GameZombie zombieThread = new GameZombie(gameSet, game);
+
+        System.out.println("");
         System.out.println("You still have " + gameSet.getArgent() + " money.");
         System.out.println("You can place a flower at any moment of the game. Enter first the flower type and then the x and y position.");
         System.out.println("1 - The basic flower costs 10 and can reach the enemy at 1 with a 185 damage.");
@@ -163,9 +207,12 @@ public class Game {
         
             try {
 
-                while(game.checkGameEnd(gameSet.getZombies()) || game.zombieWin(gameSet.getZombies())) {
+                while(game.checkGameEnd(gameSet.getZombies()) && game.enemyWin(gameSet.getZombies())) {
 
                     int typePlante = Integer.valueOf(reader.readLine());
+                    if (! zombieThread.isAlive()) {
+                        break;
+                    }
                     int pos_x = Integer.valueOf(reader.readLine());
                     int pos_y = Integer.valueOf(reader.readLine());
 
@@ -178,6 +225,12 @@ public class Game {
                     plante.createPlante(typePlante, pos_x, pos_y);
                     
             }
+
+            System.out.println("What do you want to do?");
+            System.out.println("1 - play again");
+            System.out.println("2 - exit the game");
+            int whatNext = Integer.valueOf(reader.readLine());
+            game.processNextStep(whatNext);
 
             } catch (IOException e) {
             

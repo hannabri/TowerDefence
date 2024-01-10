@@ -6,18 +6,18 @@ public class GameZombie extends Thread {
     Game game;
     long sleep;
     
-    public GameZombie(GrilleJeu gameSet, Game game, long sleep) {
+    public GameZombie(GrilleJeu gameSet, Game game) {
         
         this.gameSet = gameSet;
         this.game = game;
-        this.sleep = sleep;
+        this.sleep = game.getSpeed();
 
     }
 
     public void avancer() {
     
         game.attaque_avance(gameSet.getZombies(), gameSet.getPlantes());
-
+        System.out.println("");
         gameSet.afficher();
         System.out.println("");
 
@@ -32,17 +32,22 @@ public class GameZombie extends Thread {
             try {
                 Thread.sleep(sleep);
             } catch (Exception e) {
-                System.out.println("FAIL");
+                System.out.println("");
             }
 
-            if (! game.zombieWin(gameSet.getZombies())) {
+            if (! game.enemyWin(gameSet.getZombies())) {
+                System.out.println("GAME OVER!");
+                System.out.println("Enter any number to go back to the menu!");
                 goOn = false;
             } else{
                 if (! game.checkGameEnd(gameSet.getZombies())){
                     v --;
-                    game.createZombieVague(gameSet);
                     if (v == 0) {
+                        System.out.println("The flowers win!");
+                        System.out.println("Enter any number to go back to the menu!");
                         goOn = false;
+                    } else {
+                        game.createZombieVague(gameSet);
                     }
                 }
             }
