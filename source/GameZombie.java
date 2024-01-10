@@ -37,13 +37,15 @@ public class GameZombie extends Thread {
 
             if (! game.enemyWin(gameSet.getZombies())) {
                 System.out.println("GAME OVER!");
+                System.out.println("");
                 System.out.println("Enter any number to go back to the menu!");
                 goOn = false;
             } else{
                 if (! game.checkGameEnd(gameSet.getZombies())){
                     v --;
                     if (v == 0) {
-                        System.out.println("The flowers win!");
+                        System.out.println("YOU WIN!");
+                        System.out.println("");
                         System.out.println("Enter any number to go back to the menu!");
                         goOn = false;
                     } else {
