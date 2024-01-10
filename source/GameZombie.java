@@ -40,9 +40,10 @@ public class GameZombie extends Thread {
             } else{
                 if (! game.checkGameEnd(gameSet.getZombies())){
                     v --;
-                    game.createZombieVague(gameSet);
                     if (v == 0) {
                         goOn = false;
+                    } else {
+                        game.createZombieVague(gameSet);
                     }
                 }
             }

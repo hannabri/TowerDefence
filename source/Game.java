@@ -9,6 +9,7 @@ import java.util.Random;
 
 public class Game {
 
+
     private long speed;
     private int vagues;
 
@@ -16,9 +17,7 @@ public class Game {
     private ArrayList<Plante> plantesMortes = new ArrayList<>();
     private ArrayList<Zombie> zombiesMorts = new ArrayList<>();
 
-    public Game(long speed) {
-        this.speed = speed;
-    }
+    public Game(long speed) {}
 
     public void setVagues(int v) {
         this.vagues = v;
@@ -26,6 +25,10 @@ public class Game {
 
     public int getVagues() {
         return vagues;
+    }
+
+    public void setSpeed(long s) {
+        this.speed = s;
     }
 
     // méthode pour qu'une plante attaque un zombie et vice versa
@@ -119,13 +122,28 @@ public class Game {
     public void processGameMode(int m) {
         switch (m) {
             case 1:
-                setVagues(1);
+                setVagues(3);
                 break;
         
             case 2:
                 setVagues(10000);
                 break;
         }
+    }
+
+    public void processLevel(int l) {
+        switch(l){
+            case 1:
+                setSpeed(5000); // 5 seconds
+                break;
+            case 2:
+                setSpeed(3000); // 3 seconds
+                break;
+            case 3: 
+                setSpeed(2000); // 2 seconds
+                break;
+        }
+        
     }
 
     // gère le jeu dans la console
@@ -146,6 +164,10 @@ public class Game {
         int playMode = Integer.valueOf(reader.readLine());
         game.processGameMode(playMode);
 
+        System.out.println("Now let's see how good you are! Which level do you want to play? You can chose between level 1, 2 and 3 by entering the corresponding number.");
+        int level = Integer.valueOf(reader.readLine());
+        game.processLevel(level);
+
         System.out.println("You still have " + gameSet.getArgent() + " money.");
         System.out.println("You can place a flower at any moment of the game. Enter first the flower type and then the x and y position.");
         System.out.println("1 - The basic flower costs 10 and can reach the enemy at 1 with a 185 damage.");
@@ -162,7 +184,6 @@ public class Game {
             try {
 
                 while(game.checkGameEnd(gameSet.getZombies()) && game.enemyWin(gameSet.getZombies())) {
-                    System.out.println("Number of zombis: " + gameSet.getZombies().size());
 
                     int typePlante = Integer.valueOf(reader.readLine());
                     int pos_x = Integer.valueOf(reader.readLine());
@@ -175,7 +196,6 @@ public class Game {
                     }
 
                     plante.createPlante(typePlante, pos_x, pos_y);
-                    System.out.println("End of while");
                     
             }
 
