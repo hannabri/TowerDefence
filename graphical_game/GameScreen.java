@@ -62,8 +62,6 @@ public class GameScreen extends JFrame {
         startNextWave();
 
         // Create a panel to add the money and the level of the game
-
-
         timer = new Timer(100, new ActionListener() {
 
             @Override

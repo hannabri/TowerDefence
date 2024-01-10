@@ -5,15 +5,10 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.Action;
-
-public class Enemi extends Pion implements Projectile {
-
-
+public class Enemi extends Pion  {
 
     private int gain = 50;
     private int dommage;
@@ -103,49 +98,23 @@ public class Enemi extends Pion implements Projectile {
     public void setReach(int reach) {
         this.reach = reach;
     }
-
-    @Override
-    public int getDamage() {
-        return dommage;
-    }
-
     public void setProjectileSpeed(double speed) {
         this.projectileSpeed = speed;
     }
 
-    @Override
-    public double[] getPosition() {
-        return new double[]{x, y};
-    }
+
 
     @Override
     public void setDamage(int damage) {
         this.dommage = damage;
     }
 
-    @Override
-    public void setPosition(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
 
     @Override
     public void setSpeed(double speed) {
         this.projectileSpeed = speed;
     }
 
-    @Override
-    public void updateProjPosition() {
-        // for downward movement of projectile
-       y += speed;
-    }
-
-    @Override
-    public void drawProj(Graphics g) {
-        // Example: Draw a red rectangle for Enemi's projectile
-        g.setColor(Color.RED);
-        g.fillRect((int) x, (int) y, projectileSize, projectileSize);
-    }
 
     @Override
     public double getSpeed() {
