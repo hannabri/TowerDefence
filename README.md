@@ -3,11 +3,11 @@
 Ce projet est une implémentation en Java d'un jeu Tower Denfence pour le cours de programmation orientée objet. Initiallement conçu pour les L2 Informatique, les étudiants du Master Linguistique Informatique ont également suivi ce cours.
 
 ## Compilation 
-???
+Le programme a compilé sur Windows avec la commande suivante: javac ./TowerDefence/source/Main_file.java
 
 ## Exécution
 
-Ici insérer la commande d'exécution ??? 
+Pour lancer le jeu, il faut entrer la commande suivante: java Main_file.java
 
 ## Utilisation
 
