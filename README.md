@@ -4,10 +4,16 @@ Ce projet est une implémentation en Java d'un jeu Tower Denfence pour le cours 
 
 ## Compilation 
 Le programme a compilé sur Windows avec la commande suivante: javac ./TowerDefence/source/Main_file.java
+Pour Linux Ubuntu, nous avons créer un dossier build dans lequel nous avons mis tous les fichiers .class de toutes les packages. Pour cela, nous avons défini le classpath au dossier build dans TowerDefence avec la commande: export CLASSPATH=./build/ <br>
+Voici la commande qui permet de complier un dossier à partir du dossier TowerDefence: javac -d ./build ./source/*.java (example pour le package source) <br>
+Ensuite, nous avons créer des fichiers .jar à partir des dossiers avec les fichers .class. La commande qui le permet est la suivante: jar cf Scenes.jar build/*.class (example pour les fichiers .class du package Scenes)<br>
+Nous avons dû compiler dossier par dossier, car certains fichiers utilisent d'autres packages de notre projet. Afin de pouvoir compiler il leur faut le fichier .jar du package.
+Pour finir, la derniére commande pour compiler le program complet est : javac ./source/Main_file.java
 
 ## Exécution
 
-Pour lancer le jeu, il faut entrer la commande suivante: java Main_file.java
+Pour lancer le jeu, il faut entrer la commande suivante: java Main_file.java pour Windows. 
+Sur Ubuntu, la commande java TowerDefence.Source.Main_file permet d'exécuter le jeu sur le terminal.
 
 ## Utilisation
 
