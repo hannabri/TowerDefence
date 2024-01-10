@@ -14,17 +14,17 @@ public class Main_file {
 
             switch (displayMode) {
                 case 1:
-                    System.out.println("You have chosen terminal mode\n");
-                    Game.console_game(args);
+                    System.out.println("You chose terminal mode\n");
+                    Game.console_game();
                     break;
                 case 2:
-                    System.out.println("You have chosen Graphical mode\n");
+                    System.out.println("You chose Graphical mode\n");
                     Menu menu = new Menu();
                     menu.setVisible(true); // set the menu visible
                     break;
                 default:
                     System.out.println("Default mode is terminal mode\n");
-                    Game.console_game(args);
+                    Game.console_game();
             }
         } catch (Exception e) {
             System.out.println("Error: Invalid input. Please enter a valid mode.");
