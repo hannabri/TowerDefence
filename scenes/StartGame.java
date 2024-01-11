@@ -9,11 +9,9 @@ public class StartGame extends JFrame{
     public StartGame() {
         // Create the GameScreen
         // new GameScreen();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new GameScreen().setVisible(true);
-            }
+        SwingUtilities.invokeLater(() -> {
+            GameScreen gameScreen = new GameScreen();
+            gameScreen.setVisible(true);
         });
 
 

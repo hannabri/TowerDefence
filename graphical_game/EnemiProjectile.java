@@ -3,7 +3,7 @@ package TowerDefence.graphical_game;
 import java.awt.Color;
 import java.awt.Graphics;
 
-class EnemiProjectile implements Projectile{
+public class EnemiProjectile implements Projectile{
 
     public int x;
     public int y;

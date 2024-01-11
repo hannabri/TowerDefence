@@ -53,6 +53,10 @@ public class Enemi extends Pion  {
 
     private void moveDownward() {
         y += 5;
+        if (y > FRAME_HEIGHT) {
+            // stop moving when it reaches the bottom of the frame
+            y = FRAME_HEIGHT;
+        }
     }
 
     // Methods related to drawing

@@ -11,7 +11,7 @@ import java.util.TimerTask;
 
 public class Ami extends Pion {
 
-    public static int argent = 100;
+    public static int argent = 200;
     public static int cout = 20;
     private int dommage;
     private double projectileSpeed;
