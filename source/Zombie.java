@@ -29,7 +29,7 @@ public class Zombie {
         setPdv(100);
         setDommage(10);
         setVitesse(1);
-        setGain(15);
+        setGain(10);
         setReach(1);
     }
 

@@ -2,12 +2,10 @@ package TowerDefence.source;
 
 import java.util.ArrayList;
 
-import TD.BatailleNavale.Grille;
-
 public class GrilleJeu {
 
     // money and game set
-    public static int argent = 500;
+    public static int argent = 100;
     public static String[][] grille = new String [10][5];
 
     // lists with all the flowers and enemies

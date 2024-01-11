@@ -6,7 +6,7 @@ public class Rose extends Plante {
         super(x, y);
 
         setDommage(75);
-        setCout(40);
+        setCout(20);
         setReach(3);
         if (GrilleJeu.argent < getCout()) {
             setPdv(0);
