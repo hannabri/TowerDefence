@@ -4,19 +4,19 @@ import java.util.Random;
 
 public class Zombie {
 
-    // Je crois qu'on les initialise dès le début psk ils partent tout du même endroit.
+    // position
     private int location_x;
     private int location_y;
 
-    // Vie du zombie
+    // life (and how much money the user gets for a dead enemy)
     private int pdv;
     private int gain;
 
-    // Dommage qu'il cause
+    // dammage and reach
     private int dommage;
     private int reach;
 
-    // Vitesse d'avancement
+    // speed = how big the steps are (normal enemies move +1 and superZombies +2)
     private int vitesse;
 
     public Zombie() {
@@ -96,7 +96,7 @@ public class Zombie {
         return vitesse;
     }
 
-    // le zombie attque une plante
+    // the enemy attacks a flower
     public void attaqueZombie (Plante p) {
         if (! p.estMort() && this.getY() == p.getY() && Math.abs(this.getX() - p.getX()) <= getReach()) {
             System.out.println("ENEMY ATTACK!");
@@ -104,7 +104,7 @@ public class Zombie {
         }
     }
 
-    // attaque d'une plante, le zombie perd des points de vie et rapporte de l'argent s'il est mort
+    // method to reduce health points when a flower attacks the enemy
     public void recoitAttaque(int d) {
         this.pdv = this.pdv - d;
 

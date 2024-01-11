@@ -3,11 +3,17 @@
 Ce projet est une implémentation en Java d'un jeu Tower Denfence pour le cours de programmation orientée objet. Initiallement conçu pour les L2 Informatique, les étudiants du Master Linguistique Informatique ont également suivi ce cours.
 
 ## Compilation 
-???
+Le programme a compilé sur Windows avec la commande suivante: javac ./TowerDefence/source/Main_file.java
+Pour Linux Ubuntu, nous avons créer un dossier build dans lequel nous avons mis tous les fichiers .class de toutes les packages. Pour cela, nous avons défini le classpath au dossier build dans TowerDefence avec la commande: export CLASSPATH=./build/ <br>
+Voici la commande qui permet de complier un dossier à partir du dossier TowerDefence: javac -d ./build ./source/*.java (example pour le package source) <br>
+Ensuite, nous avons créer des fichiers .jar à partir des dossiers avec les fichers .class. La commande qui le permet est la suivante: jar cf Scenes.jar build/*.class (example pour les fichiers .class du package Scenes)<br>
+Nous avons dû compiler dossier par dossier, car certains fichiers utilisent d'autres packages de notre projet. Afin de pouvoir compiler il leur faut le fichier .jar du package.
+Pour finir, la derniére commande pour compiler le program complet est : javac ./source/Main_file.java
 
 ## Exécution
 
-Ici insérer la commande d'exécution ??? 
+Pour lancer le jeu, il faut entrer la commande suivante: java Main_file.java pour Windows. 
+Sur Ubuntu, la commande java TowerDefence.Source.Main_file permet d'exécuter le jeu sur le terminal.
 
 ## Utilisation
 
@@ -15,7 +21,7 @@ Une fois le fichier principal exécuté, il est possible de choisir entre le jeu
 
 ### Jeu terminal
 
-Avant de commencer le jeu terminal, il faut choisir entre le mode normal et le mode marathon en tappant soit 1 soit 2. Selon le chiffre entré le jeu se lancera. Chanque cinq secondes la grille du jeu sera affichée avec les emplacement les plantes créées (si déjà créées) et les enemis qui avancent. Il est possibe de placer des plantes en entrant trois chiffres. Le premier chiffre doit se trouver entre 1 et 3. Il indique le type de plante qui va être créé. Les deux autres chiffres correspondent à la position de la plante sur la grille du jeu. Les plantes peuvent être créées à n'importe quel moment pendant le jeu. À chaque création de plante le monant disponible pour créer des nouvelles plantes est affiché. Une fois des plantes créées et des enemis qui avancent, à chaque nouvelle affichage de la grille du jeu, la position, les points de vie et des éventuelles attaques sont communiqués. 
+Avant de commencer le jeu terminal, il faut choisir entre le mode normal et le mode marathon en tappant soit 1 soit 2. Selon le chiffre entré le jeu se lancera. Chanque cinq secondes la grille du jeu sera affichée avec les emplacement les plantes créées (si déjà créées) et les enemis qui avancent. Il est possibe de placer des plantes en entrant trois chiffres. Le premier chiffre doit se trouver entre 1 et 3. Il indique le type de plante qui va être créé. Les deux autres chiffres correspondent à la position de la plante sur la grille du jeu. Les plantes peuvent être créées à n'importe quel moment pendant le jeu. À chaque création de plante le monant disponible pour créer des nouvelles plantes est affiché. Une fois des plantes créées et des enemis qui avancent, à chaque nouvelle affichage de la grille du jeu, des éventuelles attaques sont communiqués. 
 
 ### Jeu graphique
 
@@ -24,4 +30,4 @@ Avant de commencer le jeu terminal, il faut choisir entre le mode normal et le m
 En choisissant le jeu sur l'interface graphique, tout d'abord le menu s'ouvre. Dans le menu il est possible de choisir les différents modes et niveaux pour le jeu dans l'onglet Settings. Avec l'onglet Rules, le jeueur peut lire les règles du jeu avant de commencer à jouer. En cliquant sur Exit, la fenêtre se ferme et le programme s'arrête. 
 
 #### Jeu
-Le premier bouton est intitulé Start Game. Comme le nom l'indique, le jeu est lancé en cliquant sur ce bouton. 
+Le premier bouton du menu est intitulé Start Game. Comme le nom l'indique, un clic sur ce bouton ouvre une nouvelle fenêtre sur laquelle le jeu est lancée. 
