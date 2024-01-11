@@ -2,6 +2,8 @@ package TowerDefence.source;
 
 import java.util.ArrayList;
 
+import TD.BatailleNavale.Grille;
+
 public class GrilleJeu {
 
     // money and game set
@@ -37,6 +39,7 @@ public class GrilleJeu {
             }
             System.out.println("");
         }
+        System.out.println("You still have " + GrilleJeu.argent + (" money."));
     }
 
     public int getArgent() {
@@ -47,7 +50,11 @@ public class GrilleJeu {
     public ArrayList<Zombie> getZombies() {
         for (Zombie z : this.zombies) {
             if (z.getX() >= 0) {
-                grille[z.getX()][z.getY()] = "E";
+                if (z.getClass() == Zombie.class){
+                    grille[z.getX()][z.getY()] = "E";
+                }else {
+                    grille[z.getX()][z.getY()] = "S";
+                }
             }
             if (z.getX() + z.getVitesse() < 10) {
                 grille[z.getX() + z.getVitesse()][z.getY()] = ".";
